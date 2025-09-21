@@ -1,0 +1,12 @@
+:root {
+  --primary-color: #5A0E1D;
+  --secondary-color: #B39984;
+  --text-color: #000000;
+  --slogan-color: #141414;
+  --bg-light: #f8f8f8;
+  --white: #ffffff;
+  --container-width: 1200px;
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+/* … see the full file for resets, buttons, grids, and responsive tweaks … */
