@@ -1,0 +1,259 @@
+/* Branding and global styles for the Stirvana landing page
+   These variables and rules define the colour palette, typography and
+   layout for the entire site. When updating colours or fonts,
+   modify the values in the :root selector below so the change
+   propagates everywhere. */
+
+:root {
+  /* Brand colours derived from the repository's info.txt
+     The primary colour is a deep burgundy (#5A0E1D) and the secondary
+     accent is a warm beige (#B39984).  Text colours use black and a
+     slightly lighter shade for the slogan to match the branding
+     guidance【669896283844982†L0-L12】. */
+  --primary-color: #5A0E1D;
+  --secondary-color: #B39984;
+  --text-color: #000000;
+  --slogan-color: #141414;
+  --bg-light: #f8f8f8;
+  --white: #ffffff;
+
+  /* Maximum width for centred content and responsive breakpoints */
+  --container-width: 1200px;
+
+  /* Font families: use Google fonts for readability.  If you wish to
+     incorporate the custom “Reislust” and “Kaushan Script” fonts
+     mentioned in the branding info you can define them here via
+     @font-face rules.  For now we rely on Poppins and Inter which
+     deliver a modern, neutral appearance. */
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-color);
+  background: var(--bg-light);
+  line-height: 1.6;
+}
+
+/* Utility classes */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Hero section */
+header.hero {
+  position: relative;
+  color: var(--white);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Use Unsplash food photo as hero background to evoke delicious, home‑cooked meals */
+  background: url('https://images.unsplash.com/photo-1551218808-94e220e084d2') center/cover no-repeat;
+}
+
+header.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+header.hero .content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+header.hero img.logo {
+  /* Increase logo size and give it a light backing so it stands out
+     against the darkened hero photo.  The white backing with
+     semi‑transparent opacity improves contrast without altering the
+     logo itself. */
+  width: 150px;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+header.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  margin: 0 0 0.5rem;
+  color: var(--white);
+}
+
+header.hero .tagline {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+header.hero p.description {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-block;
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: var(--secondary-color);
+}
+
+/* Section wrappers */
+.section {
+  padding: 4rem 1rem;
+}
+
+.section.light {
+  background: var(--bg-light);
+}
+
+.section.dark {
+  background: var(--white);
+}
+
+.section h2 {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+/* Persona grid */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.persona-grid .persona-item svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.persona-grid .persona-item h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.persona-grid .persona-item p {
+  color: var(--text-color);
+}
+
+/* Ordered list for "How it works" */
+.ol-list {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.ol-list ol {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.ol-list strong {
+  color: var(--primary-color);
+}
+
+/* Features grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.features-grid svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.feature-item span strong {
+  display: block;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 880px) {
+  header.hero h1 {
+    font-size: 2.5rem;
+  }
+  header.hero .tagline {
+    font-size: 1.5rem;
+  }
+  .btn-primary {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
