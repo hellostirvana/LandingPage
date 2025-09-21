@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Reislust
+font link: http://www.fontspace.com/ketjupmandja/reislust
+font author: Ihsan Habib
+font author site: https://www.instagram.com/ihsanhbib/
+Slogan Font: KaushanScript-Regular.ttf
+
+icon designer: Dairy Free Design
+icon designer link: /creator/emmaihall/
+        
+{"bg":"transparent","icon-gradient-0":"#5A0E1D","icon-gradient-1":"#B39984","font":"#000000","slogan":"#141414"}
+      
