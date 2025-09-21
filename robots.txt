@@ -1,0 +1,6 @@
+# robots.txt for stirvana.food
+
+User-agent: *
+Allow: /
+
+Sitemap: https://stirvana.food/sitemap.xml
