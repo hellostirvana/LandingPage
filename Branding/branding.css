@@ -87,8 +87,15 @@ header.hero .content {
 }
 
 header.hero img.logo {
-  width: 120px;
+  /* Increase logo size and give it a light backing so it stands out
+     against the darkened hero photo.  The white backing with
+     semi‑transparent opacity improves contrast without altering the
+     logo itself. */
+  width: 150px;
   margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 header.hero h1 {
