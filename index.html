@@ -11,45 +11,35 @@
     <meta property="og:url" content="https://stirvana.food">
     <title>Stirvana – Cook. Share. Connect.</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="Branding/vector/default.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="Branding/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="Branding/apple-touch-icon.png" sizes="180x180">
     <link rel="stylesheet" href="Branding/branding.css">
   </head>
   <body>
     <!-- Hero section -->
     <!-- Hero -->
-<section style="
-  position:relative; 
-  text-align:center; 
-  color:white; 
-  min-height:70vh; 
-  display:flex; 
-  flex-direction:column; 
-  justify-content:center; 
-  align-items:center; 
-  background:url('https://images.unsplash.com/photo-1551218808-94e220e084d2') center/cover no-repeat;
-  font-family:'Poppins', sans-serif;
-">
+<header class="hero">
   <!-- Overlay -->
-  <div style="position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.45); z-index:0;"></div>
+  <div class="overlay"></div>
+
+  <!-- Top-left logo/brand -->
+  <a href="index.html" class="logo-link">
+    <img src="Branding/vector/default-monochrome-white.svg" alt="Stirvana logo">
+  </a>
+
   <!-- Hero content -->
-  <div style="position:relative; z-index:1; max-width:700px; padding:20px; margin-top:-60px;">
-    <!-- No logo here now -->
-    <h1 style="font-size:4em; font-weight:bold; margin-bottom:10px; line-height:1.1;">
-    <a href="index.html" style="text-decoration:none; color:inherit;"
-     onmouseover="this.style.color='#ff6b35'" 
-     onmouseout="this.style.color='inherit'">
-      Stirvana
-      </a>
-      </h1>
-     <!-- Tagline below logo -->
-    <h2 style="font-size:3em; font-weight:bold; margin-bottom:15px;">Cook. Share. Connect.</h2>
-    <p style="font-size:1.3em; line-height:1.5; margin-bottom:25px;">
-      The platform where home chefs, food lovers, and culture seekers come together — with AI that takes the hassle out of planning, shopping, and hosting.
+  <div class="content">
+    <h2>Cook. Share. Connect.</h2>
+    <p class="description">
+      The platform where home chefs, food lovers, and culture seekers come together —
+      with AI that takes the hassle out of planning, shopping, and hosting.
     </p>
-   <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiJGTS_F3IPpw-Aca09KK3QEhxMotsWsSegEaNjWrUbaXHlA/viewform?usp=sharing&ouid=111010170965230946131" class="btn-primary" target="_blank">Join the Waitlist →</a>
-    <p style="font-size:0.9em; margin-top:15px; opacity:0.85;">Early members get priority booking and exclusive rewards.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiJGTS_F3IPpw-Aca09KK3QEhxMotsWsSegEaNjWrUbaXHlA/viewform?usp=sharing"
+       class="btn-primary" target="_blank">Join the Waitlist →</a>
+    <p class="note">Early members get priority booking and exclusive rewards.</p>
   </div>
-</section>
+</header>
+
 
 
     <!-- Persona value tiles -->
