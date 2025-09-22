@@ -57,65 +57,82 @@ body {
 }
 
 /* Hero section */
+/* Hero section */
 header.hero {
   position: relative;
   color: var(--white);
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  /* Use Unsplash food photo as hero background to evoke delicious, home‑cooked meals */
   background: url('https://images.unsplash.com/photo-1551218808-94e220e084d2') center/cover no-repeat;
+  font-family: var(--font-heading, 'Poppins', sans-serif);
 }
 
-header.hero::before {
-  content: '';
+header.hero .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 0;
 }
+
+/* Top-left brand link */
+h/* Make the backing dark so the white logo is visible */
+header.hero .logo-link {
+  background: rgba(0, 0, 0, 0.6);  /* was white */
+  padding: 8px 10px;
+  border-radius: 8px;
+  z-index: 3; /* stays above overlay */
+}
+
+/* Explicit size for the SVG logo */
+header.hero .logo-link img {
+  width: 140px;       /* tweak to taste */
+  height: auto;
+  display: block;     /* remove inline gaps */
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); /* subtle pop on photo */
+}
+
+/* Mobile: slightly smaller logo */
+@media (max-width: 640px) {
+  header.hero .logo-link img {
+    width: 100px;
+  }
+}
+
+header.hero .logo-link:hover {
+  background: transparent; /* darker for contrast */
+}
+
 
 header.hero .content {
   position: relative;
   z-index: 1;
-  max-width: 800px;
-  padding: 2rem;
+  max-width: 700px;
+  padding: 20px;
+  margin-top: -40px; /* pulls content upward */
 }
 
-header.hero img.logo {
-  /* Increase logo size and give it a light backing so it stands out
-     against the darkened hero photo.  The white backing with
-     semi‑transparent opacity improves contrast without altering the
-     logo itself. */
-  width: 150px;
-  margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
-
-header.hero h1 {
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  margin: 0 0 0.5rem;
-  color: var(--white);
-}
-
-header.hero .tagline {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--secondary-color);
+header.hero h2 {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 header.hero p.description {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin-bottom: 25px;
 }
+
+header.hero p.note {
+  font-size: 0.9em;
+  margin-top: 15px;
+  opacity: 0.85;
+}
+
 
 /* Buttons */
 .btn-primary {
