@@ -138,6 +138,10 @@
     const form = document.getElementById("waitlistForm");
     const statusEl = document.getElementById("statusMessage");
     const submitBtn = form.querySelector('button[type="submit"]');
+    const form = document.getElementById("waitlistForm");
+    const btn = form.querySelector("button[type=submit]");
+    const statusEl = document.getElementById("statusMessage");
+
 
     form.addEventListener("submit", function(e) {
       e.preventDefault();
@@ -160,24 +164,27 @@
             method: "POST",
             body: JSON.stringify(data)
           })
-          .then(r => r.json())
           .then(res => {
             if (res.result === "success") {
-              statusEl.style.color = "#2e7d32";
+                gtag('event', 'waitlist_signup', {
+                'event_category': 'engagement',
+                'event_label': 'stirvana_waitlist'
+              });
               statusEl.textContent = "✅ Thanks! You’re on the Stirvana waitlist.";
+              statusEl.style.color = "#2e7d32";
               form.reset();
             } else {
+              statusEl.textContent = "⚠️ Error: " + res.error;
               statusEl.style.color = "#d32f2f";
-              statusEl.textContent = "⚠️ " + (res.error || "Submission failed.");
             }
           })
           .catch(() => {
+            statusEl.textContent = "⚠️ Submission failed. Try again.";
             statusEl.style.color = "#d32f2f";
-            statusEl.textContent = "⚠️ Network/Server error.";
           })
           .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Join the Waitlist";
+            btn.disabled = false;
+            btn.textContent = "Join the Waitlist";
           });
         });
       });
