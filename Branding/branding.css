@@ -257,9 +257,16 @@ footer {
 }
 
 footer a {
-  color: var(--secondary-color);
+  color: var(--white);
   text-decoration: none;
+  font-weight: 500;
 }
+
+footer p {
+  margin: 0;
+  font-size: 0.95em;
+}
+
 
 /* Responsive tweaks */
 @media (max-width: 880px) {
