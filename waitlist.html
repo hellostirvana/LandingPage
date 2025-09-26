@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stirvana Waitlist</title>
+
+  <!-- reCAPTCHA v3 -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfsXdUrAAAAAFQ_jgl6VnWcAKDZF2BuKZadv0NG"></script>
+
+  <style>
+    .waitlist-section {
+      background: #fffaf5;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .logo-link img {
+      max-width: 180px;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
+
+    .form-container h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #2d2d2d;
+    }
+
+    .form-container p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    form label {
+      display: block;
+      text-align: left;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      color: #444;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    form button {
+      background: linear-gradient(135deg, #ff7043, #ff5722);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    form button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #ff5722, #e64a19);
+    }
+
+    #statusMessage {
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="waitlist-section">
+    <div class="form-container">
+        <a href="index.html" class="logo-link">
+        <img src="Branding/vector/default-monochrome-black.svg" alt="Stirvana Logo">
+      </a>
+      <h2>Join the Stirvana Waitlist</h2>
+      <p>Be among the first to discover authentic food experiences powered by culture, community, and AI.</p>
+
+      <form id="waitlistForm">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="+1 555 123 4567">
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="Houston, TX">
+
+        <label for="interest">Your Interest</label>
+        <textarea id="interest" name="interest" placeholder="Hosting dinners, discovering cuisines, meeting chefs..."></textarea>
+
+        <button type="submit">Join the Waitlist</button>
+      </form>
+
+      <p id="statusMessage"></p>
+    </div>
+  </section>
+
+  <script>
+    const RECAPTCHA_SITE_KEY = "6LfsXdUrAAAAAFQ_jgl6VnWcAKDZF2BuKZadv0NG";   // 👈 paste your site key
+    const APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbweacw4RnA7xR2P2QvvxcFDKSmLv4fg1bZ07_aRj9RFBAaNlhRLlY_eygm5UH5qyCejUA/exec"; // 👈 paste your Apps Script /exec URL
+
+    const form = document.getElementById("waitlistForm");
+    const statusEl = document.getElementById("statusMessage");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      statusEl.textContent = "";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      grecaptcha.ready(function() {
+        grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "waitlist" }).then(function(token) {
+          const data = {
+            email: document.getElementById("email").value,
+            name: document.getElementById("name").value,
+            phone: document.getElementById("phone").value,
+            city: document.getElementById("city").value,
+            interest: document.getElementById("interest").value,
+            recaptchaToken: token
+          };
+
+          fetch(APPSCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          })
+          .then(r => r.json())
+          .then(res => {
+            if (res.result === "success") {
+              statusEl.style.color = "#2e7d32";
+              statusEl.textContent = "✅ Thanks! You’re on the Stirvana waitlist.";
+              form.reset();
+            } else {
+              statusEl.style.color = "#d32f2f";
+              statusEl.textContent = "⚠️ " + (res.error || "Submission failed.");
+            }
+          })
+          .catch(() => {
+            statusEl.style.color = "#d32f2f";
+            statusEl.textContent = "⚠️ Network/Server error.";
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Join the Waitlist";
+          });
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
