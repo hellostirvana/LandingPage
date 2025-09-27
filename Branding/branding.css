@@ -290,3 +290,31 @@ footer p {
     margin-top: 1rem;
   }
 }
+
+/* ✅ Consistent top padding for hero & waitlist */
+header.hero,
+.waitlist-section {
+  padding-top: 4rem;
+}
+
+@media (max-width: 640px) {
+  header.hero,
+  .waitlist-section {
+    padding-top: 5rem; /* more breathing room on phones */
+  }
+}
+
+/* ✅ Ensure logos are responsive everywhere */
+header.hero .logo-link img,
+.waitlist-section .logo-link img {
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  header.hero .logo-link img,
+  .waitlist-section .logo-link img {
+    max-width: 140px;
+  }
+}
