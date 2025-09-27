@@ -69,6 +69,13 @@ header.hero {
   text-align: center;
   background: url('https://images.unsplash.com/photo-1551218808-94e220e084d2') center/cover no-repeat;
   font-family: var(--font-heading, 'Poppins', sans-serif);
+  padding-top: 4rem; 
+}
+
+@media (max-width: 640px) {
+  header.hero {
+    padding-top: 5rem; /* ✅ more on phones so logo never gets clipped */
+  }
 }
 
 header.hero .overlay {
@@ -85,6 +92,7 @@ header.hero .logo-link {
   padding: 8px 10px;
   border-radius: 8px;
   z-index: 3; /* stays above overlay */
+  margin-top: 0.5rem; 
 }
 
 /* Explicit size for the SVG logo */
@@ -93,6 +101,7 @@ header.hero .logo-link img {
   height: auto;
   display: block;     /* remove inline gaps */
   filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); /* subtle pop on photo */
+   max-width: 100%; 
 }
 
 /* Mobile: slightly smaller logo */
@@ -112,7 +121,7 @@ header.hero .content {
   z-index: 1;
   max-width: 700px;
   padding: 20px;
-  margin-top: -40px; /* pulls content upward */
+  margin-top: 0px; /* pulls content upward */
 }
 
 header.hero h2 {
