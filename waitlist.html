@@ -151,62 +151,60 @@
   </section>
 
   <script>
-    const RECAPTCHA_SITE_KEY = "6LfsXdUrAAAAAFQ_jgl6VnWcAKDZF2BuKZadv0NG";
-    const APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbzW4JbzjNW_iAr62sxAFljf1mfsI3pzHC7x_Xor3JsMT7aKlwRq3xzoEDnj472iNsE/exec";
+  const RECAPTCHA_SITE_KEY = "6LfsXdUrAAAAAFQ_jgl6VnWcAKDZF2BuKZadv0NG";
+  const APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbzW4JbzjNW_iAr62sxAFljf1mfsI3pzHC7x_Xor3JsMT7aKlwRq3xzoEDnj472iNsE/exec";
 
-    const form = document.getElementById("waitlistForm");
-    const statusEl = document.getElementById("statusMessage");
-    const submitBtn = form.querySelector("button[type=submit]");
+  const form = document.getElementById("waitlistForm");
+  const statusEl = document.getElementById("statusMessage");
+  const submitBtn = form.querySelector("button[type=submit]");
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      statusEl.textContent = "";
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Submitting...";
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    statusEl.textContent = "";
+    statusEl.style.color = "";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
 
-      grecaptcha.ready(function() {
-        grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "waitlist" }).then(function(token) {
-          const data = {
-            email: document.getElementById("email").value,
-            name: document.getElementById("name").value,
-            phone: document.getElementById("phone").value,
-            city: document.getElementById("city").value,
-            interest: document.getElementById("interest").value,
-            recaptchaToken: token
-          };
+    grecaptcha.ready(function() {
+      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "waitlist" }).then(function(token) {
+        // Build FormData instead of JSON
+        const fd = new FormData();
+        fd.append("email",   document.getElementById("email").value);
+        fd.append("name",    document.getElementById("name").value);
+        fd.append("phone",   document.getElementById("phone").value);
+        fd.append("city",    document.getElementById("city").value);
+        fd.append("interest",document.getElementById("interest").value);
+        fd.append("recaptchaToken", token);
 
-          fetch(APPSCRIPT_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-          })
-          .then(res => res.json())
-          .then(res => {
-            if (res.result === "success") {
-              gtag("event", "waitlist_signup", {
-                event_category: "engagement",
-                event_label: "stirvana_waitlist"
-              });
-              statusEl.textContent = "✅ Thanks! You’re on the Stirvana waitlist.";
-              statusEl.style.color = "#2e7d32";
-              form.reset();
-            } else {
-              statusEl.textContent = "⚠️ Error: " + res.error;
-              statusEl.style.color = "#d32f2f";
-            }
-          })
-          .catch(() => {
-            statusEl.textContent = "⚠️ Submission failed. Try again.";
-            statusEl.style.color = "#d32f2f";
-          })
-          .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Join the Waitlist";
+        // Send as no-cors FormData to avoid preflight / CORS failure
+        fetch(APPSCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: fd
+        })
+        .then(() => {
+          // We cannot read the response in no-cors mode,
+          // so we treat it as success if fetch() didn't throw.
+          gtag("event", "waitlist_signup", {
+            event_category: "engagement",
+            event_label: "stirvana_waitlist"
           });
+
+          statusEl.textContent = "✅ Thanks! You’re on the Stirvana waitlist.";
+          statusEl.style.color = "#2e7d32"; // green
+          form.reset();
+        })
+        .catch(() => {
+          statusEl.textContent = "⚠️ Submission failed. Try again.";
+          statusEl.style.color = "#d32f2f"; // red
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Join the Waitlist";
         });
       });
     });
-  </script>
-
+  });
+</script>
 </body>
 </html>
