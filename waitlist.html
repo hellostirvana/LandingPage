@@ -11,13 +11,13 @@
   </script>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- important for scaling -->
-  <title>Stirvana Waitlist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stirvana Waitlist - Join as Food Lover or Home Chef</title>
 
   <!-- reCAPTCHA v3 -->
   <script src="https://www.google.com/recaptcha/api.js?render=6LfsXdUrAAAAAFQ_jgl6VnWcAKDZF2BuKZadv0NG"></script>
   
-  <link rel="icon" href="Branding/vector/default-monochrome.svg" type="image/png" sizes="32x32">
+  <link rel="icon" href="Branding/vector/default-monochrome.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="Branding/apple-touch-icon.png" sizes="180x180">
   <link rel="stylesheet" href="Branding/branding.css">
 
@@ -29,7 +29,7 @@
     }
 
     .form-container {
-      max-width: 500px;
+      max-width: 550px;
       margin: 0 auto;
       background: #ffffff;
       padding: 2rem;
@@ -37,17 +37,18 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
-.logo-link {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  cursor: pointer;
-}
+    .logo-link {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+    }
 
-@media (max-width: 600px) {
-  .logo-link img {
-    max-width: 140px; /* shrink further on phones */
-  }
-}
+    @media (max-width: 600px) {
+      .logo-link img {
+        max-width: 140px;
+      }
+    }
+
     .form-container h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
@@ -60,6 +61,56 @@
       font-size: 1rem;
     }
 
+    /* Role selector buttons */
+    .role-selector {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .role-btn {
+      flex: 1;
+      padding: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 0.75rem;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .role-btn:hover {
+      border-color: #ff7043;
+      background: #fff5f2;
+    }
+
+    .role-btn.active {
+      border-color: #ff5722;
+      background: linear-gradient(135deg, #ff7043, #ff5722);
+      color: white;
+    }
+
+    .role-btn h3 {
+      margin: 0.5rem 0 0.25rem 0;
+      font-size: 1.1rem;
+    }
+
+    .role-btn p {
+      margin: 0;
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .role-btn.active p {
+      opacity: 1;
+    }
+
+    .role-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
     form label {
       display: block;
       text-align: left;
@@ -68,19 +119,28 @@
       color: #444;
     }
 
-    form input, form textarea {
+    form input, form textarea, form select {
       width: 100%;
       padding: 0.8rem;
       margin-bottom: 1rem;
       border: 1px solid #ddd;
       border-radius: 0.5rem;
       font-size: 1rem;
-      box-sizing: border-box; /* ensures proper scaling */
+      box-sizing: border-box;
+      font-family: inherit;
     }
 
     form textarea {
       resize: vertical;
       min-height: 80px;
+    }
+
+    form select {
+      cursor: pointer;
+    }
+
+    .chef-only-field {
+      display: none;
     }
 
     form button {
@@ -101,12 +161,29 @@
       background: linear-gradient(135deg, #ff5722, #e64a19);
     }
 
+    form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     #statusMessage {
       margin-top: 1rem;
       font-weight: 500;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
     }
 
-    /* Extra responsiveness */
+    .success-message {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .error-message {
+      background: #ffebee;
+      color: #c62828;
+    }
+
     @media (max-width: 600px) {
       .form-container {
         padding: 1.5rem;
@@ -114,39 +191,103 @@
       .form-container h2 {
         font-size: 1.5rem;
       }
+      .role-selector {
+        flex-direction: column;
+      }
     }
+
+    /* Logo hardening */
+    .logo-link { display:inline-block; margin-bottom:1.5rem; }
+    .logo-link img { display:block; max-width:220px; height:auto; margin:0 auto; }
+
+    /* If any global reset zeroes images, undo it here */
+    img[alt="Stirvana"] { visibility:visible !important; opacity:1 !important; }
   </style>
 </head>
 <body>
 
   <section class="waitlist-section">
     <div class="form-container">
-      <a href="index.html" class="logo-link">
-        <img src="Branding/vector/default-monochrome-black.svg" alt="Stirvana Logo">
+      <a href="index.html" class="logo-link" aria-label="Stirvana home">
+        <picture>
+          <!-- Prefer SVG when available -->
+          <source srcset="Branding/vector/default-monochrome.svg" type="image/svg+xml">
+          <!-- PNG fallback (place a copy at this path) -->
+        <img
+          src="Branding/vector/default-monochrome.png"
+          alt="Stirvana"
+          width="200"
+          height="auto"
+          decoding="async"
+          loading="eager"
+          style="display:block;margin:0 auto;max-width:220px;height:auto"
+          onerror="this.onerror=null;this.src='Branding/vector/default-monochrome.svg';"
+          >
+        </picture>
       </a>
+
       <h2>Join the Stirvana Waitlist</h2>
-      <p>Be among the first to discover authentic food experiences powered by culture, community, and AI.</p>
+      <p>Be among the first to discover authentic food experiences powered by culture, community, and AI. Launching Spring 2026 in Houston, Queens & Miami!</p>
+
+      <!-- Role Selector -->
+      <div class="role-selector">
+        <div class="role-btn active" data-role="food_lover" onclick="selectRole('food_lover')">
+          <div class="role-icon">🍽️</div>
+          <h3>Food Lover</h3>
+          <p>Discover & book</p>
+        </div>
+        <div class="role-btn" data-role="home_chef" onclick="selectRole('home_chef')">
+          <div class="role-icon">👩‍🍳</div>
+          <h3>Home Chef</h3>
+          <p>Share & earn</p>
+        </div>
+      </div>
 
       <form id="waitlistForm">
-        <label for="email">Email Address</label>
+        <input type="hidden" id="role" name="role" value="food_lover">
+
+        <label for="email">Email Address *</label>
         <input type="email" id="email" name="email" placeholder="your@email.com" required>
 
-        <label for="name">Full Name</label>
+        <label for="name">Full Name *</label>
         <input type="text" id="name" name="name" placeholder="Jane Doe" required>
 
+        <label for="city">City *</label>
+        <select id="city" name="city" required>
+          <option value="">Select your city</option>
+          <option value="Houston">Houston, TX</option>
+          <option value="Queens">Queens, NYC</option>
+          <option value="Miami">Miami, FL</option>
+          <option value="Other">Other (Coming Soon)</option>
+        </select>
+
         <label for="phone">Phone Number</label>
-        <input type="text" id="phone" name="phone" placeholder="+1 555 123 4567">
+        <input type="tel" id="phone" name="phone" placeholder="+1 555 123 4567">
 
-        <label for="city">City</label>
-        <input type="text" id="city" name="city" placeholder="Houston, TX">
+        <!-- Food Lover specific field -->
+        <div id="food_lover_field">
+          <label for="cuisine_interest">What cuisines are you most excited to try?</label>
+          <textarea id="cuisine_interest" name="cuisine_interest" placeholder="Vietnamese, Nigerian, Indian, Mexican, etc."></textarea>
+        </div>
 
-        <label for="interest">Your Interest</label>
-        <textarea id="interest" name="interest" placeholder="Hosting dinners, discovering cuisines, meeting chefs..."></textarea>
+        <!-- Home Chef specific fields -->
+        <div id="chef_specialty_field" class="chef-only-field">
+          <label for="chef_specialty">What's your specialty cuisine? *</label>
+          <input type="text" id="chef_specialty" name="chef_specialty" placeholder="e.g., Authentic Indian, Nigerian Jollof, Vietnamese Pho">
+        </div>
+
+        <div id="chef_experience_field" class="chef-only-field">
+          <label for="chef_experience">Tell us about your cooking experience</label>
+          <textarea id="chef_experience" name="chef_experience" placeholder="How long have you been cooking? Any specialties or signature dishes?"></textarea>
+        </div>
+
+        <label for="interest">Anything else you'd like us to know?</label>
+        <textarea id="interest" name="interest" placeholder="Your thoughts, questions, or what excites you most about Stirvana..."></textarea>
 
         <button type="submit">Join the Waitlist</button>
       </form>
 
-      <p id="statusMessage"></p>
+      <div id="statusMessage"></div>
     </div>
   </section>
 
@@ -158,45 +299,86 @@
   const statusEl = document.getElementById("statusMessage");
   const submitBtn = form.querySelector("button[type=submit]");
 
+  // Role selection functionality
+  function selectRole(role) {
+    // Update active button
+    document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-role="${role}"]`).classList.add('active');
+    
+    // Update hidden field
+    document.getElementById('role').value = role;
+    
+    // Show/hide relevant fields
+    const foodLoverField = document.getElementById('food_lover_field');
+    const chefSpecialtyField = document.getElementById('chef_specialty_field');
+    const chefExperienceField = document.getElementById('chef_experience_field');
+    const chefSpecialtyInput = document.getElementById('chef_specialty');
+    
+    if (role === 'home_chef') {
+      foodLoverField.style.display = 'none';
+      chefSpecialtyField.style.display = 'block';
+      chefExperienceField.style.display = 'block';
+      chefSpecialtyInput.required = true;
+      document.getElementById('cuisine_interest').required = false;
+    } else {
+      foodLoverField.style.display = 'block';
+      chefSpecialtyField.style.display = 'none';
+      chefExperienceField.style.display = 'none';
+      chefSpecialtyInput.required = false;
+      document.getElementById('cuisine_interest').required = false;
+    }
+  }
+
   form.addEventListener("submit", function(e) {
     e.preventDefault();
     statusEl.textContent = "";
-    statusEl.style.color = "";
+    statusEl.className = "";
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
     grecaptcha.ready(function() {
       grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: "waitlist" }).then(function(token) {
-        // Build FormData instead of JSON
         const fd = new FormData();
-        fd.append("email",   document.getElementById("email").value);
-        fd.append("name",    document.getElementById("name").value);
-        fd.append("phone",   document.getElementById("phone").value);
-        fd.append("city",    document.getElementById("city").value);
-        fd.append("interest",document.getElementById("interest").value);
+        fd.append("role", document.getElementById("role").value);
+        fd.append("email", document.getElementById("email").value);
+        fd.append("name", document.getElementById("name").value);
+        fd.append("city", document.getElementById("city").value);
+        fd.append("phone", document.getElementById("phone").value);
+        fd.append("interest", document.getElementById("interest").value);
         fd.append("recaptchaToken", token);
+        
+        // Add role-specific fields
+        const role = document.getElementById("role").value;
+        if (role === 'home_chef') {
+          fd.append("chef_specialty", document.getElementById("chef_specialty").value);
+          fd.append("chef_experience", document.getElementById("chef_experience").value);
+        } else {
+          fd.append("cuisine_interest", document.getElementById("cuisine_interest").value);
+        }
 
-        // Send as no-cors FormData to avoid preflight / CORS failure
         fetch(APPSCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           body: fd
         })
         .then(() => {
-          // We cannot read the response in no-cors mode,
-          // so we treat it as success if fetch() didn't throw.
           gtag("event", "waitlist_signup", {
             event_category: "engagement",
-            event_label: "stirvana_waitlist"
+            event_label: "stirvana_waitlist",
+            user_role: role
           });
 
-          statusEl.textContent = "✅ Thanks! You’re on the Stirvana waitlist.";
-          statusEl.style.color = "#2e7d32"; // green
+          statusEl.textContent = role === 'home_chef' 
+            ? "✅ Thank you! You're on the Stirvana chef waitlist. We'll be in touch soon with next steps."
+            : "✅ Thanks! You're on the Stirvana waitlist. Get ready to discover amazing food experiences!";
+          statusEl.className = "success-message";
           form.reset();
+          // Reset to food lover as default
+          selectRole('food_lover');
         })
         .catch(() => {
-          statusEl.textContent = "⚠️ Submission failed. Try again.";
-          statusEl.style.color = "#d32f2f"; // red
+          statusEl.textContent = "⚠️ Submission failed. Please try again or email us at hello@stirvana.food";
+          statusEl.className = "error-message";
         })
         .finally(() => {
           submitBtn.disabled = false;
@@ -205,6 +387,6 @@
       });
     });
   });
-</script>
+  </script>
 </body>
 </html>

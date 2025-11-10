@@ -1,320 +1,511 @@
-/* Branding and global styles for the Stirvana landing page
-   These variables and rules define the colour palette, typography and
-   layout for the entire site. When updating colours or fonts,
-   modify the values in the :root selector below so the change
-   propagates everywhere. */
+/* Stirvana branding — harmonized icon sizes + corrected overlay/logo positioning */
 
-:root {
-  /* Brand colours derived from the repository's info.txt
-     The primary colour is a deep burgundy (#5A0E1D) and the secondary
-     accent is a warm beige (#B39984).  Text colours use black and a
-     slightly lighter shade for the slogan to match the branding
-     guidance【669896283844982†L0-L12】. */
-  --primary-color: #5A0E1D;
-  --secondary-color: #B39984;
-  --text-color: #000000;
-  --slogan-color: #141414;
-  --bg-light: #f8f8f8;
-  --white: #ffffff;
+:root{
+  /* Brand colours */
+  --primary-color:#5A0E1D;       /* deep burgundy */
+  --secondary-color:#B39984;     /* warm beige */
+  --accent-color:#A02C40;        /* icon accent */
+  --accent-color-dark:#8B2436;   /* hover/darker accent */
 
-  /* Maximum width for centred content and responsive breakpoints */
-  --container-width: 1200px;
+  --text-color:#000000;
+  --slogan-color:#141414;
+  --bg-light:#f8f8f8;
+  --white:#ffffff;
 
-  /* Font families: use Google fonts for readability.  If you wish to
-     incorporate the custom “Reislust” and “Kaushan Script” fonts
-     mentioned in the branding info you can define them here via
-     @font-face rules.  For now we rely on Poppins and Inter which
-     deliver a modern, neutral appearance. */
-  --font-heading: "Poppins", sans-serif;
-  --font-body: "Inter", sans-serif;
+  /* Layout */
+  --container-width:1200px;
+
+  /* Typography */
+  --font-heading:"Poppins",sans-serif;
+  --font-body:"Inter",sans-serif;
+
+  /* Icon size tokens (kept modest per feedback) */
+  --icon-hero-note:12px;  /* rocket in hero note */
+  --icon-persona:28px;    /* persona tiles */
+  --icon-feature:18px;    /* “Why people love” + Sense features */
+  --icon-how:16px;        /* How tiles */
+  --icon-faq:12px;        /* FAQ h3 icons */
 }
 
-/* Reset and base styles */
-* {
-  box-sizing: border-box;
+/* Base reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--text-color);
+  background:var(--bg-light);
+  line-height:1.6;
 }
 
-html, body {
-  height: 100%;
+/* Utilities */
+.container{
+  width:100%;
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:0 1rem;
 }
 
-body {
-  margin: 0;
-  font-family: var(--font-body);
-  color: var(--text-color);
-  background: var(--bg-light);
-  line-height: 1.6;
+/* =========================
+   Hero
+   ========================= */
+header.hero{
+  position:relative;
+  color:var(--white);
+  min-height:70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:url('https://images.unsplash.com/photo-1551218808-94e220e084d2') center/cover no-repeat;
+  font-family:var(--font-heading);
+  padding-top:4rem;
+}
+@media (max-width:640px){ header.hero{ padding-top:5rem } }
+
+/* Slightly lighter overlay so the photo reads better */
+header.hero .overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45); /* was darker; reduced to avoid “heavy” overlay */
+  z-index:0;
 }
 
-/* Utility classes */
-.container {
-  width: 100%;
-  max-width: var(--container-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+/* Pin the brand mark top-center and above overlay */
+header.hero .logo-link{
+  position:absolute;
+  top:1rem;
+  left:50%; /* Center the element's start point */
+  transform:translateX(-50%); /* Shift it back by half its width for true center */
+  /* --- FIX: Removed background colour here --- */
+  background:none; /* Removed black rectangle */
+  padding:8px 10px;
+  border-radius:8px;
+  z-index:3;               /* above overlay and content */
+  transition:background .3s ease;
+}
+header.hero .logo-link img{
+  width:140px;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 1px 6px rgba(0,0,0,.35));
+  max-width:100%;
+}
+@media (max-width:640px){
+  header.hero .logo-link img{ width:100px }
+}
+header.hero .logo-link:hover{ background:rgba(0,0,0,0.1) } /* Added a subtle hover effect, in case you still want feedback */
+
+header.hero .content{
+  position:relative;
+  z-index:1;               /* above overlay */
+  max-width:700px;
+  padding:20px;
+  margin-top:0;
 }
 
-/* Hero section */
-/* Hero section */
-header.hero {
+header.hero h2{
+  font-size:3rem;
+  font-weight:700;
+  margin-bottom:15px;
+}
+header.hero p.description{
+  font-size:1.3rem;
+  line-height:1.5;
+  margin-bottom:25px;
+}
+header.hero p.note{
+  font-size:.9rem;
+  margin-top:15px;
+  opacity:.9;
+}
+/* Small rocket icon */
+.hero .note svg{
+  width:var(--icon-hero-note);
+  height:var(--icon-hero-note);
+  vertical-align:middle;
+  color:var(--accent-color);
+}
+
+/* Buttons */
+.btn-primary{
+  display:inline-block;
+  background:var(--primary-color);
+  color:var(--white);
+  padding:.75rem 1.5rem;
+  border-radius:.5rem;
+  text-decoration:none;
+  font-weight:700;
+  transition:background .3s ease, transform .15s ease;
+}
+.btn-primary:hover{ background:var(--secondary-color); transform:translateY(-1px) }
+
+/* Sections */
+.section{ padding:4rem 1rem }
+.section.light{ background:var(--bg-light) }
+.section.dark{ background:var(--white) }
+.section h2{
+  text-align:center;
+  font-family:var(--font-heading);
+  font-size:2rem;
+  margin-bottom:2rem;
+  color:var(--primary-color);
+  text-transform:uppercase;
+}
+
+/* =========================
+   Personas
+   ========================= */
+.persona-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  gap:1.5rem;
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+}
+.persona-grid .persona-item svg{
+  width:var(--icon-persona);
+  height:var(--icon-persona);
+  margin-bottom:.5rem;
+  color:var(--primary-color);
+  flex:0 0 auto;
+}
+.persona-grid .persona-item h3{
+  font-size:1.3rem;
+  font-weight:600;
+  margin-bottom:.5rem;
+}
+.persona-grid .persona-item p{ color:var(--text-color) }
+
+/* =========================
+   Features (Sense + Why People Love)
+   ========================= */
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  gap:1.5rem;
+  max-width:980px; /* match Sense container */
+  margin:0 auto;
+  font-size:1.05rem;
+  line-height:1.5;
+}
+.feature-item{
+  display:flex;
+  align-items:flex-start;
+  gap:.5rem;
+}
+.features-grid .feature-item svg{
+  width:var(--icon-feature);
+  height:var(--icon-feature);
+  color:currentColor;
+  opacity:.95;
+  flex:0 0 auto;
+  transition:transform .15s ease, opacity .2s ease;
+}
+.features-grid .feature-item:hover svg{ transform:translateY(-1px); opacity:1 }
+.feature-item span strong{ display:block }
+
+/* =========================
+   HOW STIRVANA WORKS (tiles)
+   ========================= */
+.how-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:1rem;
+  max-width:1000px;
+  margin:1.25rem auto 0;
+}
+.how-item{
+  background:var(--white);
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:16px;
+  padding:1rem;
+  display:grid;
+  grid-template-columns:auto 1fr; /* icon + text */
+  align-items:start;
+  gap:.6rem;
+  box-shadow:0 8px 24px rgba(0,0,0,.04);
+  transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.how-item:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(0,0,0,.07);
+  border-color:rgba(160,44,64,.25);
+}
+.how-item svg{
+  width:var(--icon-how);
+  height:var(--icon-how);
+  color:var(--accent-color);
+  flex:0 0 auto;
+  display:block;
+}
+.how-item h4{
+  margin:0 0 .2rem;
+  font-size:1.05rem;
+  line-height:1.2;
+  color:var(--primary-color);
+}
+.how-item p{
+  margin:0;
+  color:#333;
+  font-size:.95rem;
+}
+
+/* Responsive for tiles */
+@media (max-width:960px){ .how-grid{ grid-template-columns:repeat(2, minmax(0,1fr)) } }
+@media (max-width:560px){ .how-grid{ grid-template-columns:1fr } }
+
+/* =========================
+   FAQ (h3 with icon)
+   ========================= */
+.h3-with-icon{
+  display:inline-flex;     /* keep icon + text aligned on one line */
+  align-items:center;
+  gap:.4rem;
+  line-height:1.25;
+}
+.h3-with-icon svg{
+  width:var(--icon-faq);
+  height:var(--icon-faq);
+  color:var(--accent-color);
+  flex:0 0 auto;
+  display:inline-block;
+  transform:translateY(1px); /* slight baseline tweak */
+  transition:transform .15s ease, color .2s ease, opacity .2s ease;
+}
+.h3-with-icon:hover svg{ transform:translateY(0) scale(1.05); color:var(--accent-color-dark) }
+
+/* IMPORTANT: no broad “.section h3 svg” or “.section h3:hover svg” rules —
+   they caused unintended scaling across sections. */
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:2rem 1rem;
+  background:var(--primary-color);
+  color:var(--white);
+}
+footer a{
+  color:var(--white);
+  text-decoration:none;
+  font-weight:500;
+}
+footer a:hover{ text-decoration:underline }
+footer p{ margin:0; font-size:.95em }
+
+/* Responsive type tweaks */
+@media (max-width:640px){
+  header.hero h2{ font-size:2.2rem }
+  header.hero p.description{ font-size:1.1rem }
+}
+
+/* =========================
+   City pages (Houston, Miami, Queens)
+   ========================= */
+
+/* City hero section: reuse hero photography but apply overlay via ::before
+   instead of inline gradients. Allows background-image to be set on the element. */
+.city-hero {
   position: relative;
   color: var(--white);
-  min-height: 70vh;
+  min-height: 60vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  background: url('https://images.unsplash.com/photo-1551218808-94e220e084d2') center/cover no-repeat;
-  font-family: var(--font-heading, 'Poppins', sans-serif);
-  padding-top: 4rem; 
+  padding: 4rem 1rem;
+  font-family: var(--font-heading);
 }
 
-@media (max-width: 640px) {
-  header.hero {
-    padding-top: 5rem; /* ✅ more on phones so logo never gets clipped */
-  }
-}
-
-header.hero .overlay {
+/* Dark overlay on top of background image for readability */
+.city-hero::before {
+  content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.55);
+  inset: 0;
+  background: linear-gradient(135deg, rgba(90,14,29,.90), rgba(179,153,132,.80));
   z-index: 0;
 }
 
-/* Top-left brand link */
-h/* Make the backing dark so the white logo is visible */
-header.hero .logo-link {
-  background: rgba(0, 0, 0, 0.6);  /* was white */
-  padding: 8px 10px;
-  border-radius: 8px;
-  z-index: 3; /* stays above overlay */
-  margin-top: 0.5rem; 
-}
-
-/* Explicit size for the SVG logo */
-header.hero .logo-link img {
-  width: 140px;       /* tweak to taste */
-  height: auto;
-  display: block;     /* remove inline gaps */
-  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.35)); /* subtle pop on photo */
-   max-width: 100%; 
-}
-
-/* Mobile: slightly smaller logo */
-@media (max-width: 640px) {
-  header.hero .logo-link img {
-    width: 100px;
-  }
-}
-
-header.hero .logo-link:hover {
-  background: transparent; /* darker for contrast */
-}
-
-
-header.hero .content {
+/* Raise content above the overlay */
+.city-hero > * {
   position: relative;
   z-index: 1;
-  max-width: 700px;
-  padding: 20px;
-  margin-top: 0px; /* pulls content upward */
 }
 
-header.hero h2 {
-  font-size: 3em;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-header.hero p.description {
-  font-size: 1.3rem;
-  line-height: 1.5;
-  margin-bottom: 25px;
-}
-
-header.hero p.note {
-  font-size: 0.9em;
-  margin-top: 15px;
-  opacity: 0.85;
-}
-
-
-/* Buttons */
-.btn-primary {
-  display: inline-block;
-  background: var(--primary-color);
-  color: var(--white);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.btn-primary:hover {
-  background: var(--secondary-color);
-}
-
-/* Section wrappers */
-.section {
-  padding: 4rem 1rem;
-}
-
-.section.light {
-  background: var(--bg-light);
-}
-
-.section.dark {
-  background: var(--white);
-}
-
-.section h2 {
-  text-align: center;
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: var(--primary-color);
-  text-transform: uppercase;
-}
-
-/* Persona grid */
-.persona-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.persona-grid .persona-item svg {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
-}
-
-.persona-grid .persona-item h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.persona-grid .persona-item p {
-  color: var(--text-color);
-}
-
-/* Ordered list for "How it works" */
-.ol-list {
+/* Limit width and control spacing inside hero */
+.city-hero .city-content {
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.1rem;
+  margin: 0 auto;
+}
+
+.city-hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.city-hero p {
+  font-size: 1.25rem;
   line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 768px) {
+  .city-hero h1 { font-size: 2.2rem; }
+  .city-hero p { font-size: 1.1rem; }
 }
 
-.ol-list ol {
-  list-style-position: inside;
-  padding-left: 0;
+/* Hero badges (pills below the main heading) */
+.hero-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem .8rem;
+  justify-content:center;
+  margin: 0 0 1.25rem;
+}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  background: rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff;
+  padding:.45rem .7rem;
+  border-radius:999px;
+  font: 600 .9rem var(--font-body);
+  backdrop-filter: blur(4px);
+}
+.hero-badge svg{
+  /* Larger icons for hero badges */
+  width:1.6rem;
+  height:1.6rem;
+  flex:0 0 auto;
+  color:#fff;
+  opacity:.95;
 }
 
-.ol-list strong {
-  color: var(--primary-color);
+/* City cuisine grid */
+.city-cuisine-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:1.5rem;
+  max-width:1000px;
+  margin:3rem auto;
+}
+.city-cuisine-grid .cuisine-item{
+  background:var(--white);
+  padding:1.5rem;
+  border-radius:1rem;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  text-align:center;
+  transition:transform .15s ease, box-shadow .2s ease;
+}
+.city-cuisine-grid .cuisine-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+.city-cuisine-grid .cuisine-item svg{
+  width:36px;
+  height:36px;
+  color:var(--accent-color);
+  margin-bottom:.5rem;
+}
+.city-cuisine-grid .cuisine-item h3{
+  margin:.5rem 0 .25rem;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--primary-color);
+}
+.city-cuisine-grid .cuisine-item p{
+  margin:0;
+  font-size:.95rem;
+  color:var(--text-color);
 }
 
-/* Features grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.05rem;
-  line-height: 1.5;
+/* Community partnership list on city pages */
+.community-list{
+  list-style:none;
+  padding:0;
+  margin:2rem auto;
+  max-width:600px;
+  font-size:1.1rem;
+  line-height:1.8;
 }
 
-.features-grid svg {
-  width: 24px;
-  height: 24px;
-  margin-right: 0.5rem;
-  color: var(--primary-color);
-  flex-shrink: 0;
-}
-
-.feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-
-.feature-item span strong {
-  display: block;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
+/* =========================
+   Site footer (multi-column)
+   ========================= */
+.site-footer{
   background: var(--primary-color);
   color: var(--white);
+  padding: 2.5rem 1rem;
 }
-
-footer a {
-  color: var(--white);
+.footer-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.site-footer h4{
+  margin-bottom:.75rem;
+  font-family:var(--font-heading);
+  font-size:1.1rem;
+  color:var(--white);
+}
+.site-footer p{
+  margin:.25rem 0;
+}
+.site-footer ul{
+  /* Remove bullets and reset spacing for footer lists */
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.site-footer ul li{
+  /* Ensure individual list items have no markers */
+  list-style: none !important;
+  margin: 0;
+}
+.site-footer a{
+  color: var(--secondary-color) !important;
   text-decoration: none;
   font-weight: 500;
 }
-
-footer p {
-  margin: 0;
-  font-size: 0.95em;
+.site-footer a:hover{
+  text-decoration:underline;
 }
 
-
-/* Responsive tweaks */
-@media (max-width: 880px) {
-  header.hero h1 {
-    font-size: 2.5rem;
-  }
-  header.hero .tagline {
-    font-size: 1.5rem;
-  }
-  .btn-primary {
-    width: 100%;
-    margin-top: 1rem;
-  }
+/* Revised brand-consistent button for city pages */
+.btn-primary{
+  display:inline-block;
+  background:linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
+  color:var(--white);
+  padding:1rem 2rem;
+  border-radius:.5rem;
+  text-decoration:none;
+  font-weight:700;
+  font-size:1.1rem;
+  transition:transform .15s ease, opacity .2s ease;
 }
-
-/* ✅ Consistent top padding for hero & waitlist */
-header.hero,
-.waitlist-section {
-  padding-top: 4rem;
+.btn-primary:hover{
+  transform:translateY(-1px);
+  opacity:.95;
 }
-
-@media (max-width: 640px) {
-  header.hero,
-  .waitlist-section {
-    padding-top: 5rem; /* more breathing room on phones */
-  }
+.community-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:.6rem;
+  margin-bottom:.5rem;
 }
-
-/* ✅ Ensure logos are responsive everywhere */
-header.hero .logo-link img,
-.waitlist-section .logo-link img {
-  max-width: 180px;
-  width: 100%;
-  height: auto;
-}
-
-@media (max-width: 640px) {
-  header.hero .logo-link img,
-  .waitlist-section .logo-link img {
-    max-width: 140px;
-  }
+.community-list li svg{
+  /* Increase community list icon size for readability */
+  width:1.6rem;
+  height:1.6rem;
+  color:var(--accent-color);
+  flex-shrink:0;
+  margin-top:.25rem;
 }
