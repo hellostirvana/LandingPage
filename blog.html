@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stirvana | The Kitchen Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/cover.png">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FDFBF7;
+            color: #2D1A1A;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        .text-brand-dark {
+            color: #5C0D18;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#B77763] selection:text-white flex flex-col min-h-screen">
+    <div class="grain"></div>
+
+    <nav class="fixed top-0 w-full z-40 backdrop-blur-md border-b border-[#D3A88A]/30 bg-[#FDFBF7]/80">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.html"
+                class="text-brand-dark text-xl font-medium tracking-tighter serif uppercase hover:opacity-80 transition-opacity">
+                Stirvana
+            </a>
+
+            <button onclick="toggleMenu()" class="md:hidden text-[#5C0D18] p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-[#7A2C2B]">
+                <a href="index.html#how-it-works" class="hover:text-[#5C0D18] transition-colors">How it Works</a>
+                <a href="index.html#vision" class="hover:text-[#5C0D18] transition-colors">Features</a>
+                <a href="index.html#about" class="hover:text-[#5C0D18] transition-colors">About Us</a>
+                <a href="faq.html" class="hover:text-[#5C0D18] transition-colors">FAQ</a>
+                <a href="blog.html" class="text-[#5C0D18] transition-colors">Blog</a>
+            </div>
+
+            <div class="hidden md:block">
+                <a href="form.html">
+                    <button
+                        class="bg-[#5C0D18] text-[#D3A88A] px-5 py-2 rounded-full text-xs font-medium tracking-wide hover:bg-[#7A2C2B] transition-all duration-300">
+                        Join Waitlist
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu"
+            class="hidden absolute top-16 left-0 w-full bg-[#FDFBF7] border-b border-[#D3A88A]/30 p-6 flex-col gap-4 shadow-xl z-50 md:hidden">
+            <a href="index.html#how-it-works" onclick="toggleMenu()"
+                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">How it Works</a>
+            <a href="index.html#vision" onclick="toggleMenu()"
+                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">Features</a>
+            <a href="index.html#about" onclick="toggleMenu()"
+                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">About
+                Us</a>
+            <a href="faq.html" onclick="toggleMenu()"
+                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">FAQ</a>
+            <a href="blog.html" onclick="toggleMenu()"
+                class="text-[#5C0D18] font-medium py-2 hover:text-[#5C0D18]">Blog</a>
+            <a href="form.html">
+                <button
+                    class="w-full bg-[#5C0D18] text-[#D3A88A] px-5 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-[#7A2C2B] transition-all">
+                    Join Waitlist
+                </button>
+            </a>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center relative pt-20 px-6">
+        <div class="max-w-2xl text-center relative z-10">
+            <div class="mb-8 flex justify-center">
+                <div
+                    class="w-16 h-16 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#5C0D18] animate-pulse">
+                    <i data-lucide="chef-hat" class="w-8 h-8"></i>
+                </div>
+            </div>
+            <h1 class="text-4xl md:text-6xl leading-tight tracking-tight text-[#5C0D18] mb-6 font-medium serif">
+                Something delicious <br>is <span class="italic text-[#9A5046]">simmering...</span>
+            </h1>
+            <p class="text-lg text-[#7A2C2B] leading-relaxed font-light mb-8">
+                We are currently curating stories, recipes, and memories for our community. <br class="hidden md:block">
+                The table is being set, and we can't wait to share it with you.
+            </p>
+        </div>
+
+        <div class="absolute top-1/3 left-10 opacity-10 rotate-12 pointer-events-none">
+            <i data-lucide="utensils" class="w-32 h-32 text-[#5C0D18]"></i>
+        </div>
+        <div class="absolute bottom-1/4 right-10 opacity-10 -rotate-12 pointer-events-none">
+            <i data-lucide="coffee" class="w-24 h-24 text-[#5C0D18]"></i>
+        </div>
+    </main>
+
+    <footer class="bg-[#2D1A1A] text-[#D3A88A] pt-12 pb-8 mt-auto rounded-t-[2rem]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-8 mb-8 text-sm opacity-80 border-b border-[#D3A88A]/10 pb-8">
+                <a href="index.html" class="hover:text-white">Home</a>
+                <a href="index.html#vision" class="hover:text-white">Features</a>
+                <a href="faq.html" class="hover:text-white">FAQ</a>
+                <a href="blog.html" class="hover:text-white">Blog</a>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs opacity-60">
+                <p>&copy; 2025 Stirvana Inc. All rights reserved.</p>
+                <div class="flex gap-6 items-center">
+                    <a href="https://www.instagram.com/stirvanafood?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                        target="_blank" class="hover:text-white flex gap-2"><i data-lucide="instagram"
+                            class="w-4 h-4"></i> Instagram</a>
+                    <a href="https://www.facebook.com/stirvana" target="_blank" class="hover:text-white flex gap-2"><i
+                            data-lucide="facebook" class="w-4 h-4"></i> Facebook</a>
+                    <a href="https://x.com/stirvanafood/" target="_blank" class="hover:text-white flex gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg> X
+                    </a>
+                    <a href="https://www.linkedin.com/company/stirvana/" target="_blank"
+                        class="hover:text-white flex gap-2"><i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+            }
+        }
+    </script>
+</body>
+
+</html>
