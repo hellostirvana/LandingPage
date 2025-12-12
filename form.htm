@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stirvana | Join the Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfsXdUrAAAAAFQ_jgl6VnWcAKDZF2BuKZadv0NG"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/cover.png">
+</head>
+
+<body class="antialiased selection:bg-[#B77763] selection:text-white min-h-screen flex flex-col bg-[#FDFBF7]">
+    <div class="grain"></div>
+
+    <nav class="fixed top-0 w-full z-40 backdrop-blur-md border-b border-[#D3A88A]/30 bg-[#FDFBF7]/80">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="index.htm"
+                class="text-brand-dark text-xl font-medium tracking-tighter serif uppercase hover:opacity-80 transition-opacity">
+                Stirvana
+            </a>
+            <a href="index.htm"
+                class="text-xs font-medium text-[#7A2C2B] hover:text-[#5C0D18] flex items-center gap-1"><i
+                    data-lucide="arrow-left" class="w-3 h-3"></i> Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-6 pt-24 pb-12 relative overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D3A88A]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#5C0D18]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none">
+        </div>
+
+        <div class="w-full max-w-lg relative z-10">
+            <div class="text-center mb-10">
+                <h1 class="text-3xl md:text-4xl font-medium text-[#5C0D18] mb-3 serif">Save your seat at the table</h1>
+                <p class="text-[#9A5046] text-sm">Join the community as a guest or open your kitchen as a host.</p>
+            </div>
+
+            <div class="bg-[#EBE5DA] p-1 rounded-full flex relative mb-8 shadow-inner max-w-xs mx-auto">
+                <div id="tab-indicator"
+                    class="absolute h-[calc(100%-8px)] top-1 left-1 w-[calc(50%-4px)] bg-white rounded-full shadow-sm transition-all duration-300 ease-spring">
+                </div>
+                <button onclick="switchTab('customer')" id="tab-customer"
+                    class="relative z-10 w-1/2 py-2.5 text-sm font-semibold text-[#5C0D18] text-center rounded-full transition-colors duration-300">I'm
+                    a Guest</button>
+                <button onclick="switchTab('chef')" id="tab-chef"
+                    class="relative z-10 w-1/2 py-2.5 text-sm font-medium text-[#7A2C2B] text-center rounded-full transition-colors duration-300 hover:text-[#5C0D18]">I'm
+                    a Chef</button>
+            </div>
+
+            <div
+                class="bg-white rounded-3xl shadow-xl shadow-[#5C0D18]/5 border border-[#D3A88A]/20 overflow-hidden relative min-h-[780px]">
+
+                <form id="customer-form" name="submit-to-google-sheet"
+                    class="p-8 md:p-10 space-y-5 absolute w-full transition-all duration-300">
+                    <input type="hidden" name="role" value="Guest">
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="space-y-1.5"><label
+                                class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Full Name <span
+                                    class="text-[#B77763]">*</span></label>
+                            <div class="relative group"><i data-lucide="user"
+                                    class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="text"
+                                    name="name" placeholder="Jane Doe"
+                                    class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all"
+                                    required></div>
+                        </div>
+                        <div class="space-y-1.5"><label
+                                class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">City <span
+                                    class="text-[#B77763]">*</span></label>
+                            <div class="relative group"><i data-lucide="map-pin"
+                                    class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="text"
+                                    name="city" placeholder="Enter your city"
+                                    class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all"
+                                    required></div>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Email Address <span
+                                class="text-[#B77763]">*</span></label>
+                        <div class="relative group"><i data-lucide="mail"
+                                class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="email"
+                                name="email" placeholder="jane@example.com"
+                                class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all"
+                                required></div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Phone Number</label>
+                        <div class="relative group"><i data-lucide="phone"
+                                class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="tel" name="phone"
+                                placeholder="+1 (555) 000-0000"
+                                class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Cuisines you
+                            love</label>
+                        <div class="relative group"><i data-lucide="utensils"
+                                class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><select name="cuisine_interest"
+                                class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected>What are you excited to try?</option>
+                                <option value="italian">Italian / Mediterranean</option>
+                                <option value="asian">East Asian / Sushi</option>
+                                <option value="mexican">Mexican / Latin American</option>
+                                <option value="indian">Indian / South Asian</option>
+                                <option value="fusion">Modern Fusion</option>
+                            </select><i data-lucide="chevron-down"
+                                class="absolute right-3 top-3 w-4 h-4 text-[#D3A88A] pointer-events-none"></i></div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Additional
+                            Notes</label><textarea name="guest_notes"
+                            placeholder="Dietary restrictions, allergies, etc." rows="3"
+                            class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl px-4 py-3 focus:border-[#5C0D18] focus:bg-white transition-all resize-none"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-[#5C0D18] hover:bg-[#7A2C2B] text-[#D3A88A] font-medium py-3 rounded-xl transition-all duration-300 shadow-lg shadow-[#5C0D18]/10 flex items-center justify-center gap-2 group mt-2"><span
+                            class="btn-text">Join the Guestlist</span><i data-lucide="arrow-right"
+                            class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i></button>
+                    <p class="text-[10px] text-center text-[#9A5046]">By joining, you agree to our Terms of Service.</p>
+                </form>
+
+                <form id="chef-form" name="submit-to-google-sheet-chef"
+                    class="p-8 md:p-10 space-y-5 absolute w-full opacity-0 translate-x-10 pointer-events-none transition-all duration-300">
+                    <input type="hidden" name="role" value="Chef">
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="space-y-1.5"><label
+                                class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Full Name <span
+                                    class="text-[#B77763]">*</span></label>
+                            <div class="relative group"><i data-lucide="user"
+                                    class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="text"
+                                    name="name" placeholder="Chef Name"
+                                    class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all"
+                                    required></div>
+                        </div>
+                        <div class="space-y-1.5"><label
+                                class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">City <span
+                                    class="text-[#B77763]">*</span></label>
+                            <div class="relative group"><i data-lucide="map-pin"
+                                    class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="text"
+                                    name="city" placeholder="Enter your city"
+                                    class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all"
+                                    required></div>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Email Address <span
+                                class="text-[#B77763]">*</span></label>
+                        <div class="relative group"><i data-lucide="mail"
+                                class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="email"
+                                name="email" placeholder="chef@example.com"
+                                class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all"
+                                required></div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Phone Number</label>
+                        <div class="relative group"><i data-lucide="phone"
+                                class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="tel" name="phone"
+                                placeholder="+1 (555) 000-0000"
+                                class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all">
+                        </div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Specialty Cuisine <span
+                                class="text-[#B77763]">*</span></label>
+                        <div class="relative group"><i data-lucide="chef-hat"
+                                class="absolute left-3 top-3 w-4 h-4 text-[#D3A88A]"></i><input type="text"
+                                name="specialty" placeholder="e.g. Tuscan, Szechuan"
+                                class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-[#5C0D18] focus:bg-white transition-all"
+                                required></div>
+                    </div>
+                    <div class="space-y-1.5"><label
+                            class="text-xs font-semibold text-[#5C0D18] uppercase tracking-wide">Cooking
+                            Experience</label><textarea name="experience" placeholder="Tell us about your background"
+                            rows="2"
+                            class="w-full bg-[#FDFBF7] border border-[#E5E0D8] text-[#2D1A1A] text-sm rounded-xl px-4 py-3 focus:border-[#5C0D18] focus:bg-white transition-all resize-none"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-[#5C0D18] hover:bg-[#7A2C2B] text-[#D3A88A] font-medium py-3 rounded-xl transition-all duration-300 shadow-lg shadow-[#5C0D18]/10 flex items-center justify-center gap-2 group mt-2"><span
+                            class="btn-text">Apply as Chef</span><i data-lucide="check"
+                            class="w-4 h-4 group-hover:scale-110 transition-transform"></i></button>
+                    <p class="text-[10px] text-center text-[#9A5046]">We verify all hosts for safety & quality.</p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="success-modal"
+        class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[#2D1A1A]/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div id="modal-content"
+            class="bg-[#FDFBF7] p-8 rounded-3xl shadow-2xl border border-[#D3A88A]/20 relative z-10 w-full max-w-sm text-center transform scale-90 transition-transform duration-300">
+            <div class="w-20 h-20 bg-[#5C0D18]/5 rounded-full flex items-center justify-center mx-auto mb-6"><i
+                    data-lucide="party-popper" class="w-10 h-10 text-[#5C0D18]"></i></div>
+            <h3 class="text-3xl text-[#5C0D18] font-medium serif mb-3">Congrats!</h3>
+            <p class="text-[#7A2C2B] text-sm leading-relaxed mb-8">You are officially on the waitlist.</p>
+            <button onclick="closeModal()"
+                class="w-full bg-[#5C0D18] hover:bg-[#7A2C2B] text-[#D3A88A] font-medium py-3.5 rounded-xl transition-colors duration-300 shadow-lg shadow-[#5C0D18]/10">Awesome,
+                can't wait</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // --- CONFIGURATION ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxwvJ-T_FOGuEo7K3AL2smMWe038HrZHQra9MHu24jG5HZrXjM9zsb-cTjnVwlYSN2n/exec'; // Make sure this is correct!
+        const siteKey = '6LfsXdUrAAAAAFQ_jgl6VnWcAKDZF2BuKZadv0NG'; // YOUR SITE KEY
+        // ---------------------
+
+        const customerForm = document.forms['submit-to-google-sheet'];
+        const chefForm = document.forms['submit-to-google-sheet-chef'];
+        const modal = document.getElementById('success-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        // SUBMIT WITH CAPTCHA
+        function handleFormSubmit(e, form) {
+            e.preventDefault();
+
+            const btn = form.querySelector('button');
+            const btnText = btn.querySelector('.btn-text');
+            const originalText = btnText.innerText;
+
+            btnText.innerText = 'Verifying...';
+            btn.disabled = true;
+
+            // Generate Token
+            grecaptcha.ready(function () {
+                grecaptcha.execute(siteKey, { action: 'submit' }).then(function (token) {
+
+                    const formData = new FormData(form);
+                    formData.append('recaptchaToken', token); // Append token
+
+                    btnText.innerText = 'signing up';
+
+                    fetch(scriptURL, { method: 'POST', body: formData })
+                        .then(response => response.json())
+                        .then(response => {
+                            if (response.result === 'success') {
+                                form.reset();
+                                showModal();
+                            } else {
+                                alert('Error: ' + response.error);
+                            }
+                            btnText.innerText = originalText;
+                            btn.disabled = false;
+                        })
+                        .catch(error => {
+                            console.error('Error!', error.message);
+                            alert('Network Error. Please try again.');
+                            btnText.innerText = originalText;
+                            btn.disabled = false;
+                        });
+                });
+            });
+        }
+
+        // --- UI FUNCTIONS ---
+        function switchTab(tabName) {
+            const customerForm = document.getElementById('customer-form');
+            const chefForm = document.getElementById('chef-form');
+            const tabIndicator = document.getElementById('tab-indicator');
+            const btnCustomer = document.getElementById('tab-customer');
+            const btnChef = document.getElementById('tab-chef');
+
+            if (tabName === 'customer') {
+                tabIndicator.style.transform = 'translateX(0%)';
+                btnCustomer.classList.add('font-semibold', 'text-[#5C0D18]');
+                btnCustomer.classList.remove('font-medium', 'text-[#7A2C2B]');
+                btnChef.classList.remove('font-semibold', 'text-[#5C0D18]');
+                btnChef.classList.add('font-medium', 'text-[#7A2C2B]');
+                customerForm.style.opacity = '1'; customerForm.style.transform = 'translateX(0)'; customerForm.style.pointerEvents = 'auto';
+                chefForm.style.opacity = '0'; chefForm.style.transform = 'translateX(20px)'; chefForm.style.pointerEvents = 'none';
+            } else {
+                tabIndicator.style.transform = 'translateX(100%)';
+                btnChef.classList.add('font-semibold', 'text-[#5C0D18]');
+                btnChef.classList.remove('font-medium', 'text-[#7A2C2B]');
+                btnCustomer.classList.remove('font-semibold', 'text-[#5C0D18]');
+                btnCustomer.classList.add('font-medium', 'text-[#7A2C2B]');
+                chefForm.style.opacity = '1'; chefForm.style.transform = 'translateX(0)'; chefForm.style.pointerEvents = 'auto';
+                customerForm.style.opacity = '0'; customerForm.style.transform = 'translateX(-20px)'; customerForm.style.pointerEvents = 'none';
+            }
+        }
+
+        if (customerForm) customerForm.addEventListener('submit', e => handleFormSubmit(e, customerForm));
+        if (chefForm) chefForm.addEventListener('submit', e => handleFormSubmit(e, chefForm));
+
+        window.closeModal = function () {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-90');
+        }
+
+        function showModal() {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-90');
+            modalContent.classList.add('scale-100');
+            lucide.createIcons();
+        }
+
+        // Check for URL parameters on load
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role');
+            if (role === 'host' || role === 'chef') {
+                switchTab('chef');
+            } else if (role === 'guest') {
+                switchTab('customer');
+            }
+        });
+    </script>
+</body>
+
+</html>
