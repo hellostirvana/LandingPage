@@ -1,18 +1,25 @@
 # Stirvana Landing Page
 
-This repository contains the public landing page for [Stirvana](https://stirvana.food), a platform connecting people through food, culture, and community.
+This repository contains the public landing page for [Stirvana](https://stirvana.food).
 
-## Overview
-Stirvana makes it simple for home chefs, food lovers, and event hosts to connect, plan menus, automate groceries, and share authentic food experiences — all powered by AI.
+Stirvana is currently validating its first founder-coordinated Founding Tables in South Florida: small shared-meal experiences built around food, culture, and real conversation.
 
-## Tech Stack
-- Static HTML/CSS (no backend)
-- Inline SVG icons (Heroicons)
-- Hosted with GitHub Pages
+## Local development
+
+- `npm install`
+- `npm run build:css`
+- Serve the repository with any static file server.
+
+## Tech stack
+
+- Static HTML and CSS
+- Tailwind CSS built locally into `tailwind.css`
+- GitHub Pages hosting
 
 ## Contributing
-This repository is for the live public-facing site.  
-If you'd like to suggest improvements, please open an [issue](https://github.com/hellostirvana/landingpage/issues) or submit a pull request.
+
+This is the live public-facing site. Please open an issue or pull request for proposed changes.
 
 ## License
-All rights reserved. See the [LICENSE](LICENSE) file for details.
+
+All rights reserved. See [LICENSE](LICENSE).

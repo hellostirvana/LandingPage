@@ -1,1074 +1,162 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Discover intimate cultural dinners hosted by home chefs and community hosts. Stirvana connects people through meaningful food experiences.">
-    <title>Stirvana | Authentic Culinary Connections</title>
+    <meta name="description" content="Request a seat at a Stirvana Founding Table in South Florida: a small, curated meal built around food, culture, and real conversation.">
+    <title>Stirvana | Founding Tables in South Florida</title>
     <link rel="stylesheet" href="tailwind.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="default.svg">
-
+    <link rel="icon" type="image/svg+xml" href="default.svg">
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #FDFBF7;
-            color: #2D1A1A;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        .serif {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .grain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-        }
-
-        .text-brand-dark {
-            color: #5C0D18;
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FDFBF7; color: #2D1A1A; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        .grain { position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
     </style>
 </head>
-
 <body class="antialiased selection:bg-[#B77763] selection:text-white">
-    <div class="grain"></div>
+    <div class="grain" aria-hidden="true"></div>
 
-    <nav class="fixed top-0 w-full z-40 backdrop-blur-md border-b border-[#D3A88A]/30 bg-[#FDFBF7]/80">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#"
-                class="text-brand-dark text-xl font-medium tracking-tighter serif uppercase hover:opacity-80 transition-opacity">
-                Stirvana
-            </a>
-
-            <!-- Mobile Menu Button -->
-            <button type="button" onclick="toggleMenu()" aria-label="Toggle navigation menu"
-                aria-controls="mobile-menu" aria-expanded="false" class="md:hidden text-[#5C0D18] p-2">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+    <nav class="fixed top-0 z-40 w-full border-b border-[#D3A88A]/30 bg-[#FDFBF7]/90 backdrop-blur-md" aria-label="Primary navigation">
+        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+            <a href="index.html" class="serif text-xl font-medium uppercase tracking-tighter text-[#5C0D18]">Stirvana</a>
+            <button id="menu-button" type="button" aria-label="Toggle navigation menu" aria-controls="mobile-menu" aria-expanded="false" class="rounded-lg p-2 text-[#5C0D18] md:hidden">
+                <span class="block h-0.5 w-5 bg-current"></span><span class="mt-1.5 block h-0.5 w-5 bg-current"></span><span class="mt-1.5 block h-0.5 w-5 bg-current"></span>
             </button>
-
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-[#7A2C2B]">
-                <a href="#how-it-works" class="hover:text-[#5C0D18] transition-colors">How it Works</a>
-                <a href="#vision" class="hover:text-[#5C0D18] transition-colors">Features</a>
-                <a href="#about" class="hover:text-[#5C0D18] transition-colors">About Us</a>
-                <a href="faq.html" class="hover:text-[#5C0D18] transition-colors">FAQ</a>
-                <a href="blog.html" class="hover:text-[#5C0D18] transition-colors">Blog</a>
+            <div class="hidden items-center gap-8 text-sm font-medium text-[#7A2C2B] md:flex">
+                <a href="#founding-table" class="transition-colors hover:text-[#5C0D18]">The experience</a>
+                <a href="#how-it-works" class="transition-colors hover:text-[#5C0D18]">How it works</a>
+                <a href="#about" class="transition-colors hover:text-[#5C0D18]">About</a>
+                <a href="faq.html" class="transition-colors hover:text-[#5C0D18]">FAQ</a>
             </div>
-            <div class="hidden md:block">
-                <a href="form.html?role=guest"
-                    class="inline-block bg-[#5C0D18] text-[#D3A88A] px-5 py-2 rounded-full text-xs font-medium tracking-wide hover:bg-[#7A2C2B] transition-all duration-300">
-                    Join Waitlist
-                </a>
-            </div>
+            <a href="form.html?role=guest" class="hidden rounded-full bg-[#5C0D18] px-5 py-2.5 text-xs font-semibold tracking-wide text-[#F5D8C4] transition-colors hover:bg-[#7A2C2B] md:inline-block">Request a Seat</a>
         </div>
-
-        <!-- Mobile Menu Container -->
-        <div id="mobile-menu"
-            class="hidden absolute top-16 left-0 w-full bg-[#FDFBF7] border-b border-[#D3A88A]/30 p-6 flex-col gap-4 shadow-xl z-50 md:hidden">
-            <a href="#how-it-works" onclick="toggleMenu()"
-                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">How it Works</a>
-            <a href="#vision" onclick="toggleMenu()"
-                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">Features</a>
-            <a href="#about" onclick="toggleMenu()" class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">About
-                Us</a>
-            <a href="faq.html" onclick="toggleMenu()"
-                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">FAQ</a>
-            <a href="blog.html" onclick="toggleMenu()"
-                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">Blog</a>
-            <a href="form.html?role=guest"
-                class="block w-full bg-[#5C0D18] text-[#D3A88A] px-5 py-3 rounded-full text-sm text-center font-medium tracking-wide hover:bg-[#7A2C2B] transition-all">
-                Join Waitlist
-            </a>
+        <div id="mobile-menu" class="hidden border-t border-[#D3A88A]/20 bg-[#FDFBF7] px-6 py-5 md:hidden">
+            <div class="flex flex-col gap-4 text-[#7A2C2B]">
+                <a href="#founding-table">The experience</a><a href="#how-it-works">How it works</a><a href="#about">About</a><a href="faq.html">FAQ</a>
+                <a href="form.html?role=guest" class="mt-1 rounded-full bg-[#5C0D18] px-5 py-3 text-center font-semibold text-[#F5D8C4]">Request a Seat</a>
+            </div>
         </div>
     </nav>
 
-    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden">
-        <div
-            class="absolute top-0 left-0 w-[500px] h-[500px] bg-[#D3A88A]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-        </div>
-        <div
-            class="absolute bottom-0 right-1/2 w-[800px] h-[800px] bg-[#5C0D18]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none">
-        </div>
-
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+    <header class="relative overflow-hidden px-6 pb-20 pt-32 lg:pb-28 lg:pt-44">
+        <div class="absolute -left-48 -top-48 h-[500px] w-[500px] rounded-full bg-[#D3A88A]/15 blur-3xl" aria-hidden="true"></div>
+        <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-12">
             <div class="lg:col-span-7">
-                <div
-                    class="inline-flex items-center space-x-2 bg-[#FDFBF7] border border-[#D3A88A]/40 rounded-full px-4 py-1.5 mb-8 shadow-sm">
-                    <span class="flex h-2 w-2 rounded-full bg-[#9A5046] animate-pulse"></span>
-                    <span class="text-[#5C0D18] text-xs font-semibold tracking-wide uppercase">Launching soon</span>
+                <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-[#D3A88A]/40 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#7A2C2B] shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-[#9A5046]"></span> Founding Tables · South Florida
                 </div>
-                <h1
-                    class="text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight text-[#5C0D18] mb-8 font-medium">
-                    The kitchen is <br><span class="serif italic text-[#B77763]">connected.</span>
-                </h1>
-                <p class="text-xl text-[#7A2C2B] max-w-xl leading-relaxed font-light mb-10">
-                    Host or discover intimate cultural dinners — elevated by AI. Stirvana connects home chefs, community
-                    hosts, and explorers through meaningful food experiences.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 w-full max-w-md mb-10">
-                    <a href="form.html?role=guest"
-                        class="flex-1 w-full bg-[#5C0D18] text-[#D3A88A] px-8 py-4 rounded-full font-medium hover:bg-[#7A2C2B] transition-all duration-300 shadow-xl shadow-[#5C0D18]/10 hover:shadow-[#5C0D18]/20 hover:-translate-y-1 flex items-center justify-center gap-2 group">Find
-                        a seat
-                        <i data-lucide="utensils"
-                            class="w-4 h-4 group-hover:rotate-12 transition-transform"></i></a>
-                    <a href="form.html?role=host"
-                        class="flex-1 w-full bg-white border border-[#D3A88A]/40 text-[#5C0D18] px-8 py-4 rounded-full font-medium hover:bg-[#FDFBF7] transition-all duration-300 shadow-lg shadow-gray-200/50 hover:-translate-y-1 flex items-center justify-center gap-2">Become
-                        a Host <i data-lucide="chef-hat" class="w-4 h-4"></i></a>
+                <h1 class="max-w-4xl text-5xl font-medium leading-[1.02] tracking-tight text-[#5C0D18] sm:text-6xl lg:text-7xl">Meet interesting people through <span class="italic text-[#B77763]">food and culture.</span></h1>
+                <p class="mt-7 max-w-2xl text-lg font-light leading-relaxed text-[#7A2C2B] sm:text-xl">Join a Stirvana Founding Table in South Florida — a small, curated experience built around a shared meal, cultural discovery, and real conversation.</p>
+                <div class="mt-9 flex max-w-xl flex-col gap-3 sm:flex-row">
+                    <a href="form.html?role=guest" class="rounded-full bg-[#5C0D18] px-8 py-4 text-center font-semibold text-[#F5D8C4] shadow-xl shadow-[#5C0D18]/10 transition hover:-translate-y-0.5 hover:bg-[#7A2C2B]">Request a Seat</a>
+                    <a href="form.html?role=host" class="rounded-full border border-[#D3A88A]/60 bg-white px-8 py-4 text-center font-semibold text-[#5C0D18] shadow-lg shadow-[#5C0D18]/5 transition hover:-translate-y-0.5 hover:border-[#B77763]">Interested in Hosting?</a>
                 </div>
-                <div class="flex items-center gap-4 text-sm font-medium text-[#9A5046]">
-                    <div class="flex -space-x-4">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64"
-                            alt="User"
-                            class="w-10 h-10 rounded-full border-2 border-[#FDFBF7] object-cover ring-2 ring-[#D3A88A]/20">
-                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=64&h=64"
-                            alt="User"
-                            class="w-10 h-10 rounded-full border-2 border-[#FDFBF7] object-cover ring-2 ring-[#D3A88A]/20">
-                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64"
-                            alt="User"
-                            class="w-10 h-10 rounded-full border-2 border-[#FDFBF7] object-cover ring-2 ring-[#D3A88A]/20">
-                    </div>
-                    <span class="pl-2">Join the cultural movement</span>
+                <div class="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#7A2C2B]">
+                    <span>6–8 guests</span><span aria-hidden="true" class="text-[#D3A88A]">•</span><span>About $50–$60 per person</span><span aria-hidden="true" class="text-[#D3A88A]">•</span><span>No payment due now</span>
                 </div>
             </div>
-            <div class="lg:col-span-5 relative">
-                <div
-                    class="aspect-[4/5] relative rounded-2xl overflow-hidden shadow-2xl shadow-[#5C0D18]/10 rotate-2 hover:rotate-0 transition-all duration-700 ease-out group">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974&auto=format&fit=crop"
-                        alt="Dinner party"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#5C0D18]/60 to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 text-white">
-                        <p class="serif italic text-2xl mb-1">Sunday Roast @ Elena's</p>
-                        <p class="text-xs tracking-widest uppercase opacity-80">• 6 Seats Left</p>
+            <div class="lg:col-span-5">
+                <div class="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl shadow-[#5C0D18]/15">
+                    <img src="images/community.jpg" alt="People sharing a meal around a table" class="h-full w-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#2D1A1A]/75 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 p-7 text-white">
+                        <p class="serif text-2xl italic">A table worth joining</p>
+                        <p class="mt-1 text-xs uppercase tracking-[0.18em] text-[#F5D8C4]">Food · Culture · Conversation</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-medium text-[#5C0D18] mb-4 serif">Who belongs at the table?</h2>
-                <p class="text-[#9A5046]">An ecosystem built for connection.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-shadow">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="chef-hat" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-2">Hosts</h3>
-                    <p class="text-[#7A2C2B] text-sm mb-4 leading-relaxed">Monetize your passion. Whether you're a home
-                        chef with signature dishes or a host with the perfect vibe, we help you succeed.</p>
+    <section id="founding-table" class="bg-white px-6 py-24">
+        <div class="mx-auto max-w-7xl">
+            <div class="grid gap-12 lg:grid-cols-12 lg:items-start">
+                <div class="lg:col-span-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#9A5046]">The current experience</p>
+                    <h2 class="mt-4 text-4xl font-medium leading-tight text-[#5C0D18] sm:text-5xl">What is a Founding Table?</h2>
+                    <p class="mt-6 text-lg leading-relaxed text-[#7A2C2B]">It is an early, founder-coordinated gathering for people who want to discover a culture, enjoy a shared meal, and have a better kind of conversation.</p>
                 </div>
-                <div class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-shadow">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="utensils" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-2">Guests</h3>
-                    <p class="text-[#7A2C2B] text-sm mb-4 leading-relaxed">Access exclusive, authentic meals in local
-                        homes. Taste family recipes you won't find in restaurants.</p>
-                </div>
-                <div class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-shadow">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="camera" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-2">Gig Providers</h3>
-                    <p class="text-[#7A2C2B] text-sm mb-4 leading-relaxed">Photographers, musicians, and sous-chefs.
-                        Connect with hosts to elevate events and grow your portfolio.</p>
+                <div class="grid gap-5 sm:grid-cols-2 lg:col-span-7">
+                    <article class="rounded-3xl border border-[#D3A88A]/30 bg-[#FDFBF7] p-7"><p class="serif text-3xl italic text-[#B77763]">01</p><h3 class="mt-4 text-xl font-semibold text-[#5C0D18]">Small by design</h3><p class="mt-3 text-sm leading-relaxed text-[#7A2C2B]">Each table is planned for 6–8 guests, keeping the experience personal enough for everyone to connect.</p></article>
+                    <article class="rounded-3xl border border-[#D3A88A]/30 bg-[#FDFBF7] p-7"><p class="serif text-3xl italic text-[#B77763]">02</p><h3 class="mt-4 text-xl font-semibold text-[#5C0D18]">Curated with care</h3><p class="mt-3 text-sm leading-relaxed text-[#7A2C2B]">Stirvana reviews requests and coordinates each early table personally. A request is not a confirmed reservation.</p></article>
+                    <article class="rounded-3xl border border-[#D3A88A]/30 bg-[#FDFBF7] p-7"><p class="serif text-3xl italic text-[#B77763]">03</p><h3 class="mt-4 text-xl font-semibold text-[#5C0D18]">Flexible settings</h3><p class="mt-3 text-sm leading-relaxed text-[#7A2C2B]">Early gatherings may take place in neutral, private, or professional spaces selected for the specific table.</p></article>
+                    <article class="rounded-3xl border border-[#D3A88A]/30 bg-[#FDFBF7] p-7"><p class="serif text-3xl italic text-[#B77763]">04</p><h3 class="mt-4 text-xl font-semibold text-[#5C0D18]">Clear before commitment</h3><p class="mt-3 text-sm leading-relaxed text-[#7A2C2B]">Expect about $50–$60 per person. No payment is collected with your seat request; details come first.</p></article>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-[#5C0D18] relative overflow-hidden">
-        <div
-            class="absolute top-0 right-0 w-96 h-96 bg-[#D3A88A]/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2">
-        </div>
-        <div
-            class="absolute bottom-0 left-0 w-96 h-96 bg-[#D3A88A]/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2">
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-medium text-[#FDFBF7] mb-4 serif">Meet the Hosts</h2>
-                <p class="text-[#D3A88A]">Four ways to share your world.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div
-                    class="bg-white/5 backdrop-blur-md border border-[#D3A88A]/20 rounded-3xl p-8 hover:bg-white/10 transition-all group hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#D3A88A] mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="utensils-crossed" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#FDFBF7] mb-3">Culinary Creators</h3>
-                    <p class="text-[#D3A88A]/80 text-sm leading-relaxed">Home chefs bringing heritage flavors to life
-                        through regional feasts and shared traditions.</p>
-                </div>
-
-                <div
-                    class="bg-white/5 backdrop-blur-md border border-[#D3A88A]/20 rounded-3xl p-8 hover:bg-white/10 transition-all group hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#D3A88A] mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="heart-handshake" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#FDFBF7] mb-3">Social Weavers</h3>
-                    <p class="text-[#D3A88A]/80 text-sm leading-relaxed">Community hosts creating spaces where strangers
-                        become friends over shared meals.</p>
-                </div>
-
-                <div
-                    class="bg-white/5 backdrop-blur-md border border-[#D3A88A]/20 rounded-3xl p-8 hover:bg-white/10 transition-all group hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#D3A88A] mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="map" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#FDFBF7] mb-3">Local Guides</h3>
-                    <p class="text-[#D3A88A]/80 text-sm leading-relaxed">Hosts offering authentic city experiences by
-                        combining food with local storytelling.</p>
-                </div>
-
-                <div
-                    class="bg-white/5 backdrop-blur-md border border-[#D3A88A]/20 rounded-3xl p-8 hover:bg-white/10 transition-all group hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#D3A88A] mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="home" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#FDFBF7] mb-3">Warm Neighbors</h3>
-                    <p class="text-[#D3A88A]/80 text-sm leading-relaxed">Families serving comforting, home-style meals
-                        that
-                        make you feel right at home.</p>
-                </div>
+    <section id="how-it-works" class="bg-[#5C0D18] px-6 py-24 text-white">
+        <div class="mx-auto max-w-7xl">
+            <div class="mx-auto max-w-2xl text-center"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#D3A88A]">How it works</p><h2 class="mt-4 text-4xl font-medium sm:text-5xl">From interest to table</h2></div>
+            <div class="mt-14 grid gap-6 md:grid-cols-3">
+                <article class="rounded-3xl border border-[#D3A88A]/20 bg-white/5 p-8"><span class="flex h-11 w-11 items-center justify-center rounded-full bg-[#D3A88A]/15 font-semibold text-[#F5D8C4]">1</span><h3 class="mt-6 text-xl font-semibold">Request a seat</h3><p class="mt-3 text-sm leading-relaxed text-[#F5D8C4]/80">Tell us your area, interests, preferred setting, and whether you hope to attend solo or with others.</p></article>
+                <article class="rounded-3xl border border-[#D3A88A]/20 bg-white/5 p-8"><span class="flex h-11 w-11 items-center justify-center rounded-full bg-[#D3A88A]/15 font-semibold text-[#F5D8C4]">2</span><h3 class="mt-6 text-xl font-semibold">Hear from us personally</h3><p class="mt-3 text-sm leading-relaxed text-[#F5D8C4]/80">We use early requests to shape a table and will reach out when there is a relevant next step to discuss.</p></article>
+                <article class="rounded-3xl border border-[#D3A88A]/20 bg-white/5 p-8"><span class="flex h-11 w-11 items-center justify-center rounded-full bg-[#D3A88A]/15 font-semibold text-[#F5D8C4]">3</span><h3 class="mt-6 text-xl font-semibold">Decide with the details</h3><p class="mt-3 text-sm leading-relaxed text-[#F5D8C4]/80">You will receive the table’s date, setting, meal, and price before deciding whether to take part.</p></article>
             </div>
         </div>
     </section>
 
-
-    <section id="how-it-works" class="py-24 border-t border-[#D3A88A]/20 bg-[#FDFBF7] relative overflow-hidden">
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-64 bg-[#D3A88A]/5 -rotate-6 blur-3xl pointer-events-none">
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-medium text-[#5C0D18] tracking-tight mb-8 serif">
-                    From app to
-                    appetizer</h2>
-
-                <div class="inline-flex bg-white p-1.5 rounded-full border border-[#D3A88A]/20 shadow-inner">
-                    <button onclick="toggleHowItWorks('guest')" id="btn-guest"
-                        class="px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 transform bg-[#5C0D18] text-[#D3A88A] shadow-md shadow-[#5C0D18]/10">For
-                        Guests</button>
-                    <button onclick="toggleHowItWorks('chef')" id="btn-chef"
-                        class="px-8 py-3 rounded-full text-sm font-medium text-[#7A2C2B] hover:text-[#5C0D18] transition-all duration-300">For
-                        Hosts</button>
-                </div>
-            </div>
-
-            <div id="flow-guest" class="grid md:grid-cols-3 gap-8 md:gap-12 relative">
-                <div
-                    class="hidden md:block absolute top-[2.5rem] left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-transparent via-[#D3A88A]/30 to-transparent z-0">
-                </div>
-
-                <div class="relative z-10 flex flex-col items-center text-center group">
-                    <div
-                        class="w-20 h-20 rounded-full bg-white border-2 border-[#D3A88A]/20 flex items-center justify-center mb-8 shadow-lg shadow-[#D3A88A]/10 group-hover:scale-110 group-hover:border-[#5C0D18] transition-all duration-500 relative">
-                        <span
-                            class="text-[#5C0D18] font-serif text-2xl italic group-hover:scale-110 transition-transform">1</span>
-                    </div>
-                    <div
-                        class="bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-[#D3A88A]/10 hover:bg-white hover:shadow-xl hover:shadow-[#D3A88A]/10 transition-all duration-300 w-full">
-                        <h3 class="text-lg font-bold text-[#5C0D18] mb-3">Discover</h3>
-                        <p class="text-sm text-[#7A2C2B] leading-relaxed">Browse unique menus
-                            posted by local
-                            hosts. Filter by cuisine, vibe, or dietary needs.</p>
-                    </div>
-                </div>
-
-                <div class="relative z-10 flex flex-col items-center text-center group">
-                    <div
-                        class="w-20 h-20 rounded-full bg-white border-2 border-[#D3A88A]/20 flex items-center justify-center mb-8 shadow-lg shadow-[#D3A88A]/10 group-hover:scale-110 group-hover:border-[#5C0D18] transition-all duration-500">
-                        <span
-                            class="text-[#5C0D18] font-serif text-2xl italic group-hover:scale-110 transition-transform">2</span>
-                    </div>
-                    <div
-                        class="bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-[#D3A88A]/10 hover:bg-white hover:shadow-xl hover:shadow-[#D3A88A]/10 transition-all duration-300 w-full">
-                        <h3 class="text-lg font-bold text-[#5C0D18] mb-3">Book & Plan</h3>
-                        <p class="text-sm text-[#7A2C2B] leading-relaxed">Secure your seat
-                            instantly. Our AI
-                            handles the coordination, address sharing, and pre-dinner chat.</p>
-                    </div>
-                </div>
-
-                <div class="relative z-10 flex flex-col items-center text-center group">
-                    <div
-                        class="w-20 h-20 rounded-full bg-white border-2 border-[#D3A88A]/20 flex items-center justify-center mb-8 shadow-lg shadow-[#D3A88A]/10 group-hover:scale-110 group-hover:border-[#5C0D18] transition-all duration-500">
-                        <span
-                            class="text-[#5C0D18] font-serif text-2xl italic group-hover:scale-110 transition-transform">3</span>
-                    </div>
-                    <div
-                        class="bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-[#D3A88A]/10 hover:bg-white hover:shadow-xl hover:shadow-[#D3A88A]/10 transition-all duration-300 w-full">
-                        <h3 class="text-lg font-bold text-[#5C0D18] mb-3">Feast</h3>
-                        <p class="text-sm text-[#7A2C2B] leading-relaxed">Arrive at the host's
-                            table. Enjoy
-                            home-cooked food, cultural immersion, and real conversation.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="flow-chef" class="hidden md:grid-cols-3 gap-8 md:gap-12 relative">
-                <div
-                    class="hidden md:block absolute top-[2.5rem] left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-transparent via-[#D3A88A]/30 to-transparent z-0">
-                </div>
-
-                <div class="relative z-10 flex flex-col items-center text-center group">
-                    <div
-                        class="w-20 h-20 rounded-full bg-white border-2 border-[#D3A88A]/20 flex items-center justify-center mb-8 shadow-lg shadow-[#D3A88A]/10 group-hover:scale-110 group-hover:border-[#5C0D18] transition-all duration-500">
-                        <span
-                            class="text-[#5C0D18] font-serif text-2xl italic group-hover:scale-110 transition-transform">1</span>
-                    </div>
-                    <div
-                        class="bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-[#D3A88A]/10 hover:bg-white hover:shadow-xl hover:shadow-[#D3A88A]/10 transition-all duration-300 w-full">
-                        <h3 class="text-lg font-bold text-[#5C0D18] mb-3">Create Profile</h3>
-                        <p class="text-sm text-[#7A2C2B] leading-relaxed">Verify your ID, share
-                            your culinary
-                            story, and list your signature dishes or event types.</p>
-                    </div>
-                </div>
-                <div class="relative z-10 flex flex-col items-center text-center group">
-                    <div
-                        class="w-20 h-20 rounded-full bg-white border-2 border-[#D3A88A]/20 flex items-center justify-center mb-8 shadow-lg shadow-[#D3A88A]/10 group-hover:scale-110 group-hover:border-[#5C0D18] transition-all duration-500">
-                        <span
-                            class="text-[#5C0D18] font-serif text-2xl italic group-hover:scale-110 transition-transform">2</span>
-                    </div>
-                    <div
-                        class="bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-[#D3A88A]/10 hover:bg-white hover:shadow-xl hover:shadow-[#D3A88A]/10 transition-all duration-300 w-full">
-                        <h3 class="text-lg font-bold text-[#5C0D18] mb-3">Host & Manage</h3>
-                        <p class="text-sm text-[#7A2C2B] leading-relaxed">Set your availability.
-                            Let our AI
-                            auto-generate your grocery lists and manage guest RSVPs.</p>
-                    </div>
-                </div>
-                <div class="relative z-10 flex flex-col items-center text-center group">
-                    <div
-                        class="w-20 h-20 rounded-full bg-white border-2 border-[#D3A88A]/20 flex items-center justify-center mb-8 shadow-lg shadow-[#D3A88A]/10 group-hover:scale-110 group-hover:border-[#5C0D18] transition-all duration-500">
-                        <span
-                            class="text-[#5C0D18] font-serif text-2xl italic group-hover:scale-110 transition-transform">3</span>
-                    </div>
-                    <div
-                        class="bg-white/50 backdrop-blur-sm p-6 rounded-3xl border border-[#D3A88A]/10 hover:bg-white hover:shadow-xl hover:shadow-[#D3A88A]/10 transition-all duration-300 w-full">
-                        <h3 class="text-lg font-bold text-[#5C0D18] mb-3">Earn & Grow</h3>
-                        <p class="text-sm text-[#7A2C2B] leading-relaxed">Get paid securely within
-                            24 hours.
-                            Collect reviews to unlock higher tiers and lower fees.</p>
-                    </div>
-                </div>
+    <section class="px-6 py-24">
+        <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+            <div class="overflow-hidden rounded-[2rem]"><img src="images/culture.jpg" alt="A shared meal with food from different cultures" class="h-[420px] w-full object-cover"></div>
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#9A5046]">Who it is for</p>
+                <h2 class="mt-4 text-4xl font-medium leading-tight text-[#5C0D18] sm:text-5xl">Come curious. Leave with a story.</h2>
+                <ul class="mt-8 space-y-5 text-[#7A2C2B]">
+                    <li class="flex gap-4"><span class="mt-1 text-[#B77763]">✦</span><span>People new to South Florida who want a warmer way to meet others.</span></li>
+                    <li class="flex gap-4"><span class="mt-1 text-[#B77763]">✦</span><span>Locals looking beyond routine plans and surface-level networking.</span></li>
+                    <li class="flex gap-4"><span class="mt-1 text-[#B77763]">✦</span><span>Food lovers who enjoy learning the context and stories behind a meal.</span></li>
+                    <li class="flex gap-4"><span class="mt-1 text-[#B77763]">✦</span><span>Anyone open to a thoughtfully mixed table and genuine conversation.</span></li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-white relative border-t border-[#D3A88A]/20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-medium text-[#5C0D18] mb-4 serif">Designed For Every Kind of Food
-                    Lover</h2>
-                <p class="text-[#9A5046]">Find your place at the table.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center mb-8">
-                <div
-                    class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="compass" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-3">For Cultural Explorers</h3>
-                    <p class="text-[#7A2C2B] text-sm leading-relaxed">Authentic home-cooked dinners and real connections
-                        beyond restaurants.</p>
-                </div>
-
-                <div
-                    class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-3">For International Students</h3>
-                    <p class="text-[#7A2C2B] text-sm leading-relaxed">Home-style dishes and a welcoming community to
-                        ease homesickness.</p>
-                </div>
-
-                <div
-                    class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="users" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-3">For Families & Kid-Friendly Foodies</h3>
-                    <p class="text-[#7A2C2B] text-sm leading-relaxed">Cultural family meals that teach kids about
-                        diverse heritages.</p>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div
-                    class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="briefcase" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-3">For Professionals & Busy Individuals</h3>
-                    <p class="text-[#7A2C2B] text-sm leading-relaxed">Healthy, diverse meals with AI-powered planning
-                        that fits your schedule.</p>
-                </div>
-
-                <div
-                    class="bg-[#FDFBF7] border border-[#D3A88A]/30 rounded-3xl p-8 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#5C0D18]/10 flex items-center justify-center text-[#5C0D18] mb-6">
-                        <i data-lucide="map-pin" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#5C0D18] mb-3">For Newcomers & Travelers</h3>
-                    <p class="text-[#7A2C2B] text-sm leading-relaxed">Explore the city through local flavors and
-                        authentic meals.</p>
-                </div>
+    <section class="bg-white px-6 py-24">
+        <div class="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#D3A88A]/30 bg-[#FDFBF7] p-8 sm:p-12">
+            <div class="grid gap-8 md:grid-cols-5 md:items-center">
+                <div class="md:col-span-3"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#9A5046]">For cooks, storytellers, and space partners</p><h2 class="mt-4 text-3xl font-medium text-[#5C0D18] sm:text-4xl">Interested in Hosting?</h2><p class="mt-4 leading-relaxed text-[#7A2C2B]">If you have a food tradition, cultural story, welcoming space, or thoughtful gathering idea, share it with us. Sharing interest starts a conversation; it does not enroll you in a formal host program.</p></div>
+                <div class="md:col-span-2 md:text-right"><a href="form.html?role=host" class="inline-block rounded-full border border-[#5C0D18] px-7 py-3.5 font-semibold text-[#5C0D18] transition hover:bg-[#5C0D18] hover:text-[#F5D8C4]">Interested in Hosting?</a></div>
             </div>
         </div>
     </section>
 
-    <section id="differentiators" class="py-24 bg-[#5C0D18] relative overflow-hidden">
-        <div
-            class="absolute top-0 left-0 w-96 h-96 bg-[#D3A88A]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2">
-        </div>
-        <div
-            class="absolute bottom-0 right-0 w-96 h-96 bg-[#D3A88A]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2">
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="mb-12 max-w-2xl">
-                <h2 class="text-3xl md:text-5xl font-medium text-[#FDFBF7] tracking-tight mb-4 serif">
-                    Why Stirvana is
-                    <span class="italic text-[#D3A88A]">different.</span>
-                </h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div
-                    class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-[#D3A88A]/20 hover:bg-white/10 transition-all duration-300 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#D3A88A] mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="sparkles" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#FDFBF7] mb-3">Agentic AI Planning</h3>
-                    <p class="text-[#D3A88A]/80 text-sm leading-relaxed">Our AI Agent handles menu creation
-                        based on
-                        seasonality, manages dietary restrictions, and processes payments.</p>
-                </div>
-                <div
-                    class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-[#D3A88A]/20 hover:bg-white/10 transition-all duration-300 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#D3A88A] mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="wifi" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#FDFBF7] mb-3">Smart Kitchen Ready</h3>
-                    <p class="text-[#D3A88A]/80 text-sm leading-relaxed">Future-proof integrations to sync
-                        recipes directly
-                        to your smart oven and fridge inventory.</p>
-                </div>
-                <div
-                    class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-[#D3A88A]/20 hover:bg-white/10 transition-all duration-300 group">
-                    <div
-                        class="w-12 h-12 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#D3A88A] mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="globe" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-[#FDFBF7] mb-3">Cultural Marketplace</h3>
-                    <p class="text-[#D3A88A]/80 text-sm leading-relaxed">More than just dinner. It's a
-                        marketplace for
-                        heritage. Discover authentic recipes and traditions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
-                <div
-                    class="group relative rounded-3xl overflow-hidden bg-[#FDFBF7] border border-[#D3A88A]/30 transition-all hover:shadow-xl hover:shadow-[#D3A88A]/10">
-                    <div class="h-80 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=2070&auto=format&fit=crop"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            alt="Eating together">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="p-2 bg-[#D3A88A]/20 rounded-full text-[#7A2C2B]">
-                                <i data-lucide="compass" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-[#5C0D18]">For Cultural Explorers</h3>
-                        </div>
-                        <p class="text-[#7A2C2B] mb-6 leading-relaxed">
-                            Step into a local's home. Taste family recipes that aren't in restaurants.
-                            Meet strangers
-                            who feel like old friends.
-                        </p>
-                        <a href="form.html?role=guest"
-                            class="inline-flex items-center text-[#5C0D18] font-medium hover:gap-2 transition-all">Find
-                            a seat <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i></a>
-                    </div>
-                </div>
-
-                <div
-                    class="group relative rounded-3xl overflow-hidden bg-[#5C0D18] text-[#D3A88A] transition-all hover:shadow-xl hover:shadow-[#5C0D18]/20">
-                    <div class="h-80 overflow-hidden relative">
-                        <div class="absolute inset-0 bg-[#5C0D18]/20 z-10"></div>
-                        <img src="images/jason-briscoe-7MAjXGUmaPw-unsplash.jpg"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            alt="Cooking">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="p-2 bg-[#D3A88A]/20 rounded-full text-[#D3A88A]">
-                                <i data-lucide="chef-hat" class="w-5 h-5"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-[#FDFBF7]">For Hosts</h3>
-                        </div>
-                        <p class="text-[#D3A88A]/80 mb-6 leading-relaxed">
-                            Monetize your passion. Share your culinary heritage as a chef, or curate
-                            unforgettable
-                            evenings as a host. We handle the rest.
-                        </p>
-                        <a href="form.html?role=host"
-                            class="inline-flex items-center text-white font-medium hover:gap-2 transition-all">Become
-                            a
-                            host <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i></a>
-                    </div>
-                </div>
-            </div>
+    <section id="about" class="px-6 py-24">
+        <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-5 md:items-center">
+            <div class="md:col-span-2"><img src="rachana.jpg" alt="Rachana Shah, founder of Stirvana" class="mx-auto aspect-square w-full max-w-sm rounded-[2rem] object-cover object-top shadow-xl shadow-[#5C0D18]/10"></div>
+            <div class="md:col-span-3"><p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#9A5046]">About Stirvana</p><h2 class="mt-4 text-4xl font-medium text-[#5C0D18]">Built one thoughtful table at a time.</h2><p class="mt-6 leading-relaxed text-[#7A2C2B]">Stirvana began with a simple belief: food and culture can make it easier for people to move beyond small talk. At this early stage, Rachana is learning directly from guests and potential hosts by personally shaping the first South Florida tables.</p><p class="mt-6 font-semibold text-[#5C0D18]">Rachana Shah <span class="font-normal text-[#9A5046]">— Founder</span></p></div>
         </div>
     </section>
 
-    <section id="vision" class="py-24 bg-[#FDFBF7]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-16 max-w-2xl">
-                <h2 class="text-3xl md:text-5xl font-medium text-[#5C0D18] tracking-tight mb-6 serif">
-                    Built for
-                    connection,<br>designed for trust.</h2>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                <div class="group">
-                    <div
-                        class="w-10 h-10 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#5C0D18] mb-4">
-                        <i data-lucide="shield-check" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-[#5C0D18] mb-2">Vetted Community</h3>
-                    <p class="text-sm text-[#7A2C2B] leading-relaxed opacity-80">Every host is verified
-                        through ID
-                        checks and kitchen interviews.</p>
-                </div>
-                <div class="group">
-                    <div
-                        class="w-10 h-10 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#5C0D18] mb-4">
-                        <i data-lucide="credit-card" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-[#5C0D18] mb-2">Seamless Payments</h3>
-                    <p class="text-sm text-[#7A2C2B] leading-relaxed opacity-80">Split bills
-                        automatically and tip your
-                        host digitally.</p>
-                </div>
-                <div class="group">
-                    <div
-                        class="w-10 h-10 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#5C0D18] mb-4">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-[#5C0D18] mb-2">Ice-Breaker AI</h3>
-                    <p class="text-sm text-[#7A2C2B] leading-relaxed opacity-80">Nervous? Our app
-                        provides fun
-                        conversation starters based on the menu.</p>
-                </div>
-                <div class="group">
-                    <div
-                        class="w-10 h-10 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#5C0D18] mb-4">
-                        <i data-lucide="calendar" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-[#5C0D18] mb-2">Smart Scheduling</h3>
-                    <p class="text-sm text-[#7A2C2B] leading-relaxed opacity-80">Dynamic calendar
-                        syncing helps hosts
-                        fill seats.</p>
-                </div>
-                <div class="group">
-                    <div
-                        class="w-10 h-10 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#5C0D18] mb-4">
-                        <i data-lucide="clipboard-list" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-[#5C0D18] mb-2">Scope Builder</h3>
-                    <p class="text-sm text-[#7A2C2B] leading-relaxed opacity-80">Define your cooking
-                        needs (groceries,
-                        cleanup, prep) and instantly get matched with the perfect chef.</p>
-                </div>
-                <div class="group">
-                    <div
-                        class="w-10 h-10 rounded-full bg-[#D3A88A]/20 flex items-center justify-center text-[#5C0D18] mb-4">
-                        <i data-lucide="sparkles" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-[#5C0D18] mb-2">Menu Generation</h3>
-                    <p class="text-sm text-[#7A2C2B] leading-relaxed opacity-80">Stuck on what to cook?
-                        Our AI suggests
-                        seasonal menus.</p>
-                </div>
-            </div>
-        </div>
+    <section class="bg-[#D3A88A] px-6 py-20 text-center">
+        <div class="mx-auto max-w-3xl"><h2 class="text-4xl font-medium text-[#5C0D18] sm:text-5xl">Your next good conversation may start here.</h2><p class="mx-auto mt-5 max-w-xl text-[#7A2C2B]">Share what draws you to the table. We’ll use your request to plan the first South Florida gatherings and follow up personally.</p><a href="form.html?role=guest" class="mt-8 inline-block rounded-full bg-[#5C0D18] px-9 py-4 font-semibold text-[#F5D8C4] transition hover:bg-[#7A2C2B]">Request a Seat</a><p class="mt-4 text-xs text-[#7A2C2B]">About $50–$60 per person · No payment due with your request</p></div>
     </section>
 
-    <section class="py-24 bg-[#F5F2EB] border-y border-[#D3A88A]/20">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1">
-                    <div class="relative">
-                        <div
-                            class="absolute -inset-4 bg-gradient-to-br from-[#D3A88A]/30 to-transparent rounded-full blur-3xl opacity-50">
-                        </div>
-                        <div
-                            class="relative bg-white rounded-2xl shadow-xl border border-[#D3A88A]/30 p-6 max-w-sm mx-auto lg:mx-0 transform rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
-                            <div class="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-[#5C0D18] flex items-center justify-center">
-                                        <i data-lucide="sparkles" class="w-4 h-4 text-[#D3A88A]"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-semibold text-[#5C0D18]">Stirvana AI</p>
-                                        <p class="text-[10px] text-gray-400">Planning Assistant</p>
-                                    </div>
-                                </div>
-                                <span
-                                    class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-full">Active</span>
-                            </div>
-                            <div class="space-y-4">
-                                <div class="flex gap-3">
-                                    <div
-                                        class="bg-gray-100 rounded-2xl rounded-tl-none p-3 text-xs text-gray-600 w-3/4">
-                                        I want to host a Tuscan dinner for 6 people next Friday.
-                                        Something rustic.
-                                    </div>
-                                </div>
-                                <div class="flex gap-3 flex-row-reverse">
-                                    <div
-                                        class="bg-[#5C0D18] rounded-2xl rounded-tr-none p-3 text-xs text-[#D3A88A] w-3/4 shadow-md">
-                                        <p class="mb-2">I've drafted the event! 🍷</p>
-                                        <div class="bg-white/10 rounded p-2 mb-2">
-                                            <p class="font-semibold text-white">Rustic Tuscan Night</p>
-                                            <p class="opacity-70">Menu: Pappa al Pomodoro, Wild Boar
-                                                Ragu</p>
-                                            <p class="opacity-70 mt-1">Price: $65/person</p>
-                                        </div>
-                                        <p>Shall I publish?</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="order-1 lg:order-2">
-                    <h2 class="text-3xl md:text-4xl font-medium text-[#5C0D18] mb-6 tracking-tight serif">
-                        Focus on the food.<br>
-                        <span class="text-[#B77763] italic">We handle the rest.</span>
-                    </h2>
-                    <p class="text-[#7A2C2B] text-lg mb-8 leading-relaxed">
-                        Hosting shouldn't be a headache. Our Agentic AI co-pilot handles scheduling,
-                        menu curation, and
-                        payments.
-                    </p>
-                </div>
-            </div>
+    <footer class="bg-[#2D1A1A] px-6 py-12 text-[#D3A88A]">
+        <div class="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div><a href="index.html" class="serif text-2xl uppercase tracking-tight text-[#F5D8C4]">Stirvana</a><p class="mt-3 max-w-sm text-sm text-[#D3A88A]/70">Small tables. Shared culture. Real conversation.</p></div>
+            <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm"><a href="form.html?role=guest" class="hover:text-white">Request a Seat</a><a href="form.html?role=host" class="hover:text-white">Hosting Interest</a><a href="faq.html" class="hover:text-white">FAQ</a><a href="privacy.html" class="hover:text-white">Privacy</a><a href="terms.html" class="hover:text-white">Terms</a></div>
         </div>
-    </section>
-    <section class="py-24 bg-[#FDFBF7] relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-medium text-[#5C0D18] mb-4 serif">What You Can Experience</h2>
-                <p class="text-[#9A5046] max-w-2xl mx-auto">From meaningful networking to neighborhood discoveries, find
-                    the connection you’re looking for.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all cursor-pointer group min-h-[320px]"
-                    onclick="toggleExperience('exp-1', this)">
-
-                    <!-- Background Image -->
-                    <img src="images/networking.jpg"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        alt="Networking">
-                    <!-- Overlay -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 group-hover:via-black/60 transition-all">
-                    </div>
-
-                    <!-- Content -->
-                    <div class="relative z-10 p-8 h-full flex flex-col">
-                        <div class="flex items-start justify-between mb-auto">
-                            <div
-                                class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
-                                <i data-lucide="lightbulb" class="w-6 h-6"></i>
-                            </div>
-                            <div class="bg-white/20 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full">
-                                <span class="text-xs font-semibold text-white uppercase tracking-wide">Networking</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-8">
-                            <h3 class="text-xl font-semibold text-white mb-2">Founders & Creators Networking Dinner</h3>
-                            <p
-                                class="text-gray-200 text-sm font-medium mb-0 group-hover:text-white transition-colors flex items-center gap-1">
-                                Tap to experience <i data-lucide="chevron-down"
-                                    class="w-4 h-4 transition-transform duration-300"></i>
-                            </p>
-
-                            <div id="exp-1" class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out">
-                                <div class="overflow-hidden">
-                                    <p class="text-gray-300 text-sm leading-relaxed border-t border-white/20 pt-4 mt-4">
-                                        Connect with Purpose. Skip the stiff conference rooms and business cards. This
-                                        is an
-                                        intimate, curated dinner designed for entrepreneurs and creatives to exchange
-                                        ideas and
-                                        build genuine professional relationships over innovative fusion cuisine.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all cursor-pointer group min-h-[320px]"
-                    onclick="toggleExperience('exp-2', this)">
-
-                    <!-- Background Image -->
-                    <div class="absolute inset-0 bg-black"> <!-- Fallback background just in case -->
-                        <img src="images/community.jpg"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90"
-                            alt="Community">
-                    </div>
-                    <!-- Overlay -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 group-hover:via-black/60 transition-all">
-                    </div>
-
-                    <!-- Content -->
-                    <div class="relative z-10 p-8 h-full flex flex-col">
-                        <div class="flex items-start justify-between mb-auto">
-                            <div
-                                class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
-                                <i data-lucide="home" class="w-6 h-6"></i>
-                            </div>
-                            <div class="bg-white/20 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full">
-                                <span class="text-xs font-semibold text-white uppercase tracking-wide">Community</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-8">
-                            <h3 class="text-xl font-semibold text-white mb-2">Neighborhood Welcome Dinner</h3>
-                            <p
-                                class="text-gray-200 text-sm font-medium mb-0 group-hover:text-white transition-colors flex items-center gap-1">
-                                Tap to experience <i data-lucide="chevron-down"
-                                    class="w-4 h-4 transition-transform duration-300"></i>
-                            </p>
-
-                            <div id="exp-2" class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out">
-                                <div class="overflow-hidden">
-                                    <p class="text-gray-300 text-sm leading-relaxed border-t border-white/20 pt-4 mt-4">
-                                        Find Your Village. A friendly community gathering designed to help you put down
-                                        roots.
-                                        Whether you just bought a home or just moved apartments, meet your neighbors,
-                                        learn
-                                        about the local culture, and feel instantly connected to your new surroundings.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all cursor-pointer group min-h-[320px]"
-                    onclick="toggleExperience('exp-3', this)">
-
-                    <!-- Background Image -->
-                    <img src="images/culture.jpg"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        alt="Culture">
-                    <!-- Overlay -->
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 group-hover:via-black/60 transition-all">
-                    </div>
-
-                    <!-- Content -->
-                    <div class="relative z-10 p-8 h-full flex flex-col">
-                        <div class="flex items-start justify-between mb-auto">
-                            <div
-                                class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white">
-                                <i data-lucide="map" class="w-6 h-6"></i>
-                            </div>
-                            <div class="bg-white/20 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full">
-                                <span class="text-xs font-semibold text-white uppercase tracking-wide">Culture</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-8">
-                            <h3 class="text-xl font-semibold text-white mb-2">Cultural Tour + Meal</h3>
-                            <p
-                                class="text-gray-200 text-sm font-medium mb-0 group-hover:text-white transition-colors flex items-center gap-1">
-                                Tap to experience <i data-lucide="chevron-down"
-                                    class="w-4 h-4 transition-transform duration-300"></i>
-                            </p>
-
-                            <div id="exp-3" class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out">
-                                <div class="overflow-hidden">
-                                    <p class="text-gray-300 text-sm leading-relaxed border-t border-white/20 pt-4 mt-4">
-                                        Walk, Learn, Taste. Explore the city with a local guide who knows the secrets
-                                        guidebooks
-                                        don't. Enjoy a short neighborhood walk to uncover hidden gems and history,
-                                        followed by
-                                        an authentic meal that brings those stories to life.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="py-24 bg-[#5C0D18] text-[#FDFBF7] relative overflow-hidden">
-        <div
-            class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D3A88A]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none">
-        </div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-3xl md:text-5xl font-medium serif mb-8">Why join the table early?</h2>
-            <div class="grid md:grid-cols-3 gap-8 mb-12 text-left">
-                <div class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-[#D3A88A]/20">
-                    <i data-lucide="star" class="text-[#D3A88A] mb-4"></i>
-                    <h4 class="font-bold text-[#D3A88A] mb-2">Founding Member</h4>
-                    <p class="text-sm opacity-80">Get a verified badge on your profile that signals
-                        trust.</p>
-                </div>
-                <div class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-[#D3A88A]/20">
-                    <i data-lucide="percent" class="text-[#D3A88A] mb-4"></i>
-                    <h4 class="font-bold text-[#D3A88A] mb-2">Zero Fees</h4>
-                    <p class="text-sm opacity-80">Hosts keep 100% of earnings for the first 60 days.</p>
-                </div>
-                <div class="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-[#D3A88A]/20">
-                    <i data-lucide="crown" class="text-[#D3A88A] mb-4"></i>
-                    <h4 class="font-bold text-[#D3A88A] mb-2">Priority Access</h4>
-                    <p class="text-sm opacity-80">Be the first to secure seats at exclusive pop-up
-                        events.</p>
-                </div>
-            </div>
-            <a href="form.html?role=guest"
-                class="inline-block bg-[#D3A88A] text-[#5C0D18] px-10 py-5 rounded-full font-bold tracking-wide hover:bg-white transition-all transform hover:scale-105 shadow-xl">Secure
-                Your Spot</a>
-        </div>
-    </section>
-
-    <section id="about" class="py-24 bg-[#FDFBF7]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-medium text-[#5C0D18] mb-6 serif">Built by food
-                        lovers, <br>for
-                        food lovers.</h2>
-                    <p class="text-[#7A2C2B] text-lg mb-6 leading-relaxed">Stirvana was born from a
-                        simple observation:
-                        in a hyper-connected digital world, we are more disconnected than ever in real
-                        life.</p>
-                    <p class="text-[#7A2C2B] mb-8 leading-relaxed">We believe the kitchen table is the
-                        original social network &mdash; a place where food, culture, and conversation bring
-                        people together.</p>
-                </div>
-                <div class="w-full max-w-sm mx-auto">
-                    <div class="space-y-3">
-                        <div class="aspect-square bg-[#D3A88A]/20 rounded-2xl overflow-hidden relative">
-                            <img src="images/rachana.jpg" alt="Rachana Shah, Founder of Stirvana"
-                                class="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all">
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-[#5C0D18]">Rachana Shah</h4>
-                            <p class="text-xs text-[#9A5046] uppercase tracking-wider">Founder</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-[#2D1A1A] text-[#D3A88A] pt-24 pb-12 rounded-t-[3rem]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 mb-20">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-medium serif mb-6 text-[#FDFBF7]">Pull up a
-                        chair.</h2>
-                    <p class="text-[#B77763] text-lg mb-8 max-w-md">We're launching in select cities
-                        soon.</p>
-                    <a href="form.html?role=guest"
-                        class="inline-block bg-[#D3A88A] text-[#5C0D18] px-8 py-4 rounded-full font-medium hover:bg-white transition-all">Join
-                        Waitlist</a>
-                </div>
-                <div class="grid grid-cols-2 gap-8 text-sm">
-                    <div>
-                        <h4 class="font-semibold text-white mb-4 uppercase tracking-wider text-xs">
-                            Platform</h4>
-                        <ul class="space-y-3 opacity-80">
-                            <li><a href="#how-it-works" class="hover:text-white">How it works</a></li>
-                            <li><a href="#vision" class="hover:text-white">Features</a></li>
-                            <li><a href="form.html?role=guest" class="hover:text-white">Join Waitlist</a>
-                            </li>
-                            <li><a href="faq.html" class="hover:text-white">FAQ</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-white mb-4 uppercase tracking-wider text-xs">
-                            Company</h4>
-                        <ul class="space-y-3 opacity-80">
-                            <li><a href="#about" class="hover:text-white">About Us</a></li>
-                            <li><a href="blog.html" class="hover:text-white">Blog</a></li>
-                            <li><a href="mailto:hello@stirvana.com" class="hover:text-white">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="border-t border-[#7A2C2B]/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs opacity-60">
-                <p>&copy; 2026 Stirvana. All rights reserved.</p>
-                <div class="flex gap-6 items-center">
-                    <a href="https://www.instagram.com/stirvanafood?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                        target="_blank" class="hover:text-white flex gap-2">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <rect x="3" y="3" width="18" height="18" rx="5" />
-                            <circle cx="12" cy="12" r="4" />
-                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                        </svg> Instagram</a>
-                    <a href="https://www.facebook.com/share/17Ljqrg7Zq/" target="_blank"
-                        class="hover:text-white flex gap-2">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M14 8h3V4h-3a6 6 0 0 0-6 6v2H5v4h3v8h4v-8h4l1-4h-5v-2a2 2 0 0 1 2-2Z" />
-                        </svg> Facebook</a>
-                    <a href="https://x.com/stirvanafood/" target="_blank" aria-label="Stirvana on X"
-                        class="hover:text-white flex gap-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/company/stirvana/" target="_blank"
-                        class="hover:text-white flex gap-2">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <circle cx="5" cy="5" r="2" />
-                            <path d="M3 9h4v12H3zM10 9h4v1.8A4.5 4.5 0 0 1 22 14v7h-4v-6a2 2 0 0 0-4 0v6h-4z" />
-                        </svg> LinkedIn</a>
-                </div>
-            </div>
-        </div>
+        <div class="mx-auto mt-10 max-w-7xl border-t border-white/10 pt-6 text-xs text-[#D3A88A]/55">© 2026 Stirvana. All rights reserved.</div>
     </footer>
 
     <script>
-        lucide.createIcons();
-
-        function toggleHowItWorks(role) {
-            const guestFlow = document.getElementById('flow-guest');
-            const chefFlow = document.getElementById('flow-chef');
-            const btnGuest = document.getElementById('btn-guest');
-            const btnChef = document.getElementById('btn-chef');
-
-            if (role === 'guest') {
-                guestFlow.classList.remove('hidden');
-                guestFlow.classList.add('grid');
-                chefFlow.classList.add('hidden');
-                chefFlow.classList.remove('grid');
-
-                // Active Guest
-                btnGuest.classList.add('bg-[#5C0D18]', 'text-[#D3A88A]', 'shadow-md');
-                btnGuest.classList.remove('text-[#7A2C2B]', 'hover:text-[#5C0D18]');
-
-                // Inactive Chef
-                btnChef.classList.remove('bg-[#5C0D18]', 'text-[#D3A88A]', 'shadow-md');
-                btnChef.classList.add('text-[#7A2C2B]', 'hover:text-[#5C0D18]');
-            } else {
-                chefFlow.classList.remove('hidden');
-                chefFlow.classList.add('grid');
-                guestFlow.classList.remove('grid');
-                guestFlow.classList.add('hidden');
-
-                // Active Chef
-                btnChef.classList.add('bg-[#5C0D18]', 'text-[#D3A88A]', 'shadow-md');
-                btnChef.classList.remove('text-[#7A2C2B]', 'hover:text-[#5C0D18]');
-
-                // Inactive Guest
-                btnGuest.classList.remove('bg-[#5C0D18]', 'text-[#D3A88A]', 'shadow-md');
-                btnGuest.classList.add('text-[#7A2C2B]', 'hover:text-[#5C0D18]');
-            }
-        }
-
-        function toggleExperience(id, element) {
-            const content = document.getElementById(id);
-            const icon = element.querySelector('[data-lucide="chevron-down"]');
-
-            // Toggle content expansion
-            if (content.classList.contains('grid-rows-[0fr]')) {
-                content.classList.remove('grid-rows-[0fr]');
-                content.classList.add('grid-rows-[1fr]');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('grid-rows-[0fr]');
-                content.classList.remove('grid-rows-[1fr]');
-                icon.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const button = document.querySelector('[aria-controls="mobile-menu"]');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
-                button.setAttribute('aria-expanded', 'true');
-            } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
-                button.setAttribute('aria-expanded', 'false');
-            }
-        }
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', String(!isOpen));
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            menuButton.setAttribute('aria-expanded', 'false');
+            mobileMenu.classList.add('hidden');
+        }));
     </script>
 </body>
-
-
 </html>

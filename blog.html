@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stories about food, culture, and meaningful connection from Stirvana.">
     <title>Stirvana | The Kitchen Table</title>
     <link rel="stylesheet" href="tailwind.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -64,17 +65,17 @@
             </button>
 
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-[#7A2C2B]">
+                <a href="index.html#founding-table" class="hover:text-[#5C0D18] transition-colors">The Experience</a>
                 <a href="index.html#how-it-works" class="hover:text-[#5C0D18] transition-colors">How it Works</a>
-                <a href="index.html#vision" class="hover:text-[#5C0D18] transition-colors">Features</a>
-                <a href="index.html#about" class="hover:text-[#5C0D18] transition-colors">About Us</a>
+                <a href="index.html#about" class="hover:text-[#5C0D18] transition-colors">About</a>
                 <a href="faq.html" class="hover:text-[#5C0D18] transition-colors">FAQ</a>
                 <a href="blog.html" class="text-[#5C0D18] transition-colors">Blog</a>
             </div>
 
             <div class="hidden md:block">
-                <a href="form.html"
+                <a href="form.html?role=guest"
                     class="inline-block bg-[#5C0D18] text-[#D3A88A] px-5 py-2 rounded-full text-xs font-medium tracking-wide hover:bg-[#7A2C2B] transition-all duration-300">
-                    Join Waitlist
+                    Request a Seat
                 </a>
             </div>
         </div>
@@ -82,20 +83,20 @@
         <!-- Mobile Menu Container -->
         <div id="mobile-menu"
             class="hidden absolute top-16 left-0 w-full bg-[#FDFBF7] border-b border-[#D3A88A]/30 p-6 flex-col gap-4 shadow-xl z-50 md:hidden">
+            <a href="index.html#founding-table" onclick="toggleMenu()"
+                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">The Experience</a>
             <a href="index.html#how-it-works" onclick="toggleMenu()"
                 class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">How it Works</a>
-            <a href="index.html#vision" onclick="toggleMenu()"
-                class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">Features</a>
             <a href="index.html#about" onclick="toggleMenu()"
                 class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">About
-                Us</a>
+                </a>
             <a href="faq.html" onclick="toggleMenu()"
                 class="text-[#7A2C2B] font-medium py-2 hover:text-[#5C0D18]">FAQ</a>
             <a href="blog.html" onclick="toggleMenu()"
                 class="text-[#5C0D18] font-medium py-2 hover:text-[#5C0D18]">Blog</a>
-            <a href="form.html"
+            <a href="form.html?role=guest"
                 class="block w-full bg-[#5C0D18] text-[#D3A88A] px-5 py-3 rounded-full text-sm text-center font-medium tracking-wide hover:bg-[#7A2C2B] transition-all">
-                Join Waitlist
+                Request a Seat
             </a>
         </div>
     </nav>
@@ -129,7 +130,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-wrap justify-center gap-8 mb-8 text-sm opacity-80 border-b border-[#D3A88A]/10 pb-8">
                 <a href="index.html" class="hover:text-white">Home</a>
-                <a href="index.html#vision" class="hover:text-white">Features</a>
+                <a href="index.html#founding-table" class="hover:text-white">The Experience</a>
                 <a href="faq.html" class="hover:text-white">FAQ</a>
                 <a href="blog.html" class="hover:text-white">Blog</a>
             </div>
