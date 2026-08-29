@@ -83,7 +83,7 @@
                             <div><label for="host-city" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">City or area <span class="text-[#B77763]">*</span></label><input id="host-city" name="city_area" type="text" required placeholder="Your area" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
                             <div><label for="host-phone" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Phone <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="host-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 000-0000" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
                         </div>
-                        <div><label for="host-role" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">How might you contribute? <span class="text-[#B77763]">*</span></label><select id="host-role" name="hosting_interest" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="cook">Prepare or share a meal</option><option value="storyteller">Share cultural knowledge or a story</option><option value="space">Offer or suggest a setting</option><option value="facilitate">Help welcome or facilitate</option><option value="other">Something else</option></select></div>
+                        <div><label for="host-role" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">How might you contribute? <span class="text-[#B77763]">*</span></label><select id="host-role" name="hosting_interest" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="cook">Prepare or share a meal</option><option value="private-chef-service">Offer Private Chef Service</option><option value="storyteller">Share cultural knowledge or a story</option><option value="space">Offer or suggest a setting</option><option value="facilitate">Help welcome or facilitate</option><option value="other">Something else</option></select></div>
                         <div><label for="host-idea" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Your idea <span class="text-[#B77763]">*</span></label><textarea id="host-idea" name="hosting_idea" required rows="5" placeholder="Tell us about the food tradition, cultural story, setting, or gathering you have in mind." class="mt-2 w-full resize-y rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></textarea></div>
                         <div><label for="host-notes" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Anything else? <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><textarea id="host-notes" name="host_notes" rows="3" placeholder="Availability, relevant experience, or questions" class="mt-2 w-full resize-y rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></textarea></div>
                         <div class="rounded-2xl bg-[#FDFBF7] px-5 py-4 text-sm leading-relaxed text-[#7A2C2B]">Stirvana is learning with a small number of early collaborators. Sharing interest starts a conversation; it does not enroll you in a formal host program.</div>
@@ -151,28 +151,122 @@
 
         function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
 
-        function submitForm(event, form, type) {
+        function getReadableFieldValue(form, formData, name) {
+            const field = form.elements.namedItem(name);
+            if (field instanceof HTMLSelectElement && field.selectedIndex >= 0) {
+                return field.options[field.selectedIndex].text.trim();
+            }
+            return String(formData.get(name) || '').trim();
+        }
+
+        function formatSubmissionSummary(entries) {
+            return entries
+                .filter(([, value]) => value)
+                .map(([label, value]) => `${label}: ${value}`)
+                .join('\n');
+        }
+
+        function createCompatiblePayload(form, type) {
+            const formData = new FormData(form);
+            formData.set('city', String(formData.get('city_area') || '').trim());
+
+            if (type === 'guest') {
+                formData.set('role', 'Guest');
+                formData.set('cuisine_interest', String(formData.get('food_cultural_interests') || '').trim());
+                formData.set('guest_notes', formatSubmissionSummary([
+                    ['Attendance type', getReadableFieldValue(form, formData, 'attendance_type')],
+                    ['Group size', getReadableFieldValue(form, formData, 'group_size')],
+                    ['Setting preference', getReadableFieldValue(form, formData, 'setting_preference')],
+                    ['Referral source', getReadableFieldValue(form, formData, 'referral_source')],
+                    ['Additional notes', String(formData.get('guest_notes') || '').trim()],
+                    ['utm_source', String(formData.get('utm_source') || '').trim()],
+                    ['utm_medium', String(formData.get('utm_medium') || '').trim()],
+                    ['utm_campaign', String(formData.get('utm_campaign') || '').trim()],
+                    ['ref', String(formData.get('ref') || '').trim()]
+                ]));
+            } else {
+                const hostingInterest = getReadableFieldValue(form, formData, 'hosting_interest');
+                formData.set('role', 'Chef');
+                formData.set('specialty', hostingInterest);
+                formData.set('experience', formatSubmissionSummary([
+                    ['Hosting/provider interest', hostingInterest],
+                    ['Hosting idea', String(formData.get('hosting_idea') || '').trim()],
+                    ['Additional notes', String(formData.get('host_notes') || '').trim()],
+                    ['utm_source', String(formData.get('utm_source') || '').trim()],
+                    ['utm_medium', String(formData.get('utm_medium') || '').trim()],
+                    ['utm_campaign', String(formData.get('utm_campaign') || '').trim()],
+                    ['ref', String(formData.get('ref') || '').trim()]
+                ]));
+            }
+
+            return formData;
+        }
+
+        function getRecaptchaToken() {
+            return new Promise((resolve, reject) => {
+                if (typeof grecaptcha === 'undefined') {
+                    reject(new Error('reCAPTCHA failed to load'));
+                    return;
+                }
+
+                try {
+                    grecaptcha.ready(() => {
+                        try {
+                            Promise.resolve(grecaptcha.execute(siteKey, { action: 'submit' })).then(resolve, reject);
+                        } catch (error) {
+                            reject(error);
+                        }
+                    });
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+
+        async function parseSubmissionResponse(response) {
+            const status = response.status;
+            const responseText = await response.text();
+            let responseData;
+
+            try {
+                responseData = JSON.parse(responseText);
+            } catch (error) {
+                console.error('Submission returned invalid JSON.', { status, responseText });
+                throw new Error(`Submission returned invalid JSON (HTTP ${status})`);
+            }
+
+            if (responseData?.result !== 'success') {
+                console.error('Submission backend rejected the request.', { status, response: responseData });
+                throw new Error(`Submission rejected by backend (HTTP ${status})`);
+            }
+
+            return responseData;
+        }
+
+        async function submitForm(event, form, type) {
             event.preventDefault();
             const button = form.querySelector('button[type="submit"]');
             const label = button.querySelector('.button-label');
             const originalLabel = label.textContent;
             button.disabled = true;
             label.textContent = 'Sending…';
-            grecaptcha.ready(() => {
-                grecaptcha.execute(siteKey, { action: 'submit' }).then(token => {
-                    const formData = new FormData(form);
-                    formData.append('recaptchaToken', token);
-                    return fetch(scriptURL, { method: 'POST', body: formData });
-                }).then(response => response.json()).then(response => {
-                    if (response.result !== 'success') throw new Error(response.error || 'Submission failed');
-                    form.reset();
-                    applyAttribution();
-                    openModal(type);
-                }).catch(error => {
-                    console.error('Submission error:', error);
-                    alert('We could not send your form. Please try again.');
-                }).finally(() => { button.disabled = false; label.textContent = originalLabel; });
-            });
+
+            try {
+                const token = await getRecaptchaToken();
+                const formData = createCompatiblePayload(form, type);
+                formData.append('recaptchaToken', token);
+                const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                await parseSubmissionResponse(response);
+                form.reset();
+                applyAttribution();
+                openModal(type);
+            } catch (error) {
+                console.error('Submission error:', { type, error });
+                alert('We could not send your form. Please try again.');
+            } finally {
+                button.disabled = false;
+                label.textContent = originalLabel;
+            }
         }
 
         guestTab.addEventListener('click', () => showTab('guest'));
