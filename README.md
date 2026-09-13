@@ -2,7 +2,7 @@
 
 This repository contains the public landing page for [Stirvana](https://stirvana.food).
 
-Stirvana is currently validating its first founder-coordinated Founding Tables in South Florida: small shared-meal experiences built around food, culture, and real conversation.
+Stirvana is currently validating its first personally coordinated Founding Tables in South Florida: small shared-meal experiences built around food, culture, and real conversation.
 
 ## Local development
 
