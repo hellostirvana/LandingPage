@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Request a seat at a Stirvana Founding Table in South Florida or share your interest in hosting.">
-    <title>Request a Seat | Stirvana</title>
+    <title>Join or Host an Experience | Stirvana</title>
     <link rel="stylesheet" href="tailwind.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,8 +38,8 @@
             </header>
 
             <div class="mx-auto mt-8 flex max-w-md rounded-full bg-[#EBE5DA] p-1" role="tablist" aria-label="Choose a form">
-                <button id="tab-guest" type="button" role="tab" aria-controls="guest-panel" aria-selected="true" class="w-1/2 rounded-full bg-white px-3 py-3 text-sm font-semibold text-[#5C0D18] shadow-sm">Request a Seat</button>
-                <button id="tab-host" type="button" role="tab" aria-controls="host-panel" aria-selected="false" class="w-1/2 rounded-full px-3 py-3 text-sm font-medium text-[#7A2C2B]">Hosting Interest</button>
+                <button id="tab-guest" type="button" role="tab" aria-controls="guest-panel" aria-selected="true" class="w-1/2 rounded-full bg-white px-3 py-3 text-sm font-semibold text-[#5C0D18] shadow-sm">Join an Experience</button>
+                <button id="tab-host" type="button" role="tab" aria-controls="host-panel" aria-selected="false" class="w-1/2 rounded-full px-3 py-3 text-sm font-medium text-[#7A2C2B]">Host an Experience</button>
             </div>
 
             <div class="mt-7 rounded-[2rem] border border-[#D3A88A]/25 bg-white p-6 shadow-xl shadow-[#5C0D18]/5 sm:p-10">
@@ -59,6 +59,14 @@
                         <div class="grid gap-5 sm:grid-cols-2">
                             <div><label for="attendance-type" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">How would you attend? <span class="text-[#B77763]">*</span></label><select id="attendance-type" name="attendance_type" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="solo">Solo</option><option value="with-others">With others</option><option value="open-to-either">Open to either</option></select></div>
                             <div><label for="group-size" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Total group size <span class="text-[#B77763]">*</span></label><select id="group-size" name="group_size" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="1">1 — just me</option><option value="2">2 people</option><option value="3">3 people</option><option value="4+">4 or more</option></select></div>
+                        </div>
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <div><label for="occasion" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">What brings you here? <span class="text-[#B77763]">*</span></label><select id="occasion" name="occasion" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="meet-people">Meet interesting people</option><option value="food-culture">Explore food and culture</option><option value="celebration">Plan a celebration</option><option value="private-group">Plan for an existing group</option><option value="corporate-community">Corporate or community gathering</option><option value="other">Something else</option></select></div>
+                            <div><label for="organizer-status" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Are you organizing for others? <span class="text-[#B77763]">*</span></label><select id="organizer-status" name="organizer_status" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="no">No, just myself/my party</option><option value="yes-group">Yes, I have a group</option><option value="yes-community">Yes, I represent a community/company</option><option value="maybe">Possibly</option></select></div>
+                        </div>
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <div><label for="guest-budget" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Comfortable price per person <span class="text-[#B77763]">*</span></label><select id="guest-budget" name="budget_per_person" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="under-50">Under $50</option><option value="50-75">$50–$75</option><option value="75-100">$75–$100</option><option value="100-plus">$100+</option><option value="depends">Depends on the experience</option></select></div>
+                            <div><label for="guest-timing" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Timing preference <span class="text-[#B77763]">*</span></label><select id="guest-timing" name="timing_preference" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="weekend-day">Weekend daytime</option><option value="weekend-evening">Weekend evening</option><option value="weekday-evening">Weekday evening</option><option value="flexible">Flexible</option></select></div>
                         </div>
                         <div><label for="interests" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Food or cultural interests <span class="text-[#B77763]">*</span></label><textarea id="interests" name="food_cultural_interests" required rows="3" placeholder="What cuisines, traditions, or stories are you curious about?" class="mt-2 w-full resize-y rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></textarea></div>
                         <div><label for="setting" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Setting preference <span class="text-[#B77763]">*</span></label><select id="setting" name="setting_preference" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="neutral-professional">Neutral or professional venue</option><option value="private">Private setting</option><option value="no-preference">No preference</option><option value="tell-me-more">I’d like to learn more first</option></select></div>
@@ -83,8 +91,22 @@
                             <div><label for="host-city" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">City or area <span class="text-[#B77763]">*</span></label><input id="host-city" name="city_area" type="text" required placeholder="Your area" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
                             <div><label for="host-phone" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Phone <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="host-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 000-0000" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
                         </div>
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <div><label for="business-name" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Business or public name <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="business-name" name="business_name" type="text" placeholder="Restaurant, chef, venue, or organization" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
+                            <div><label for="provider-type" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Provider type <span class="text-[#B77763]">*</span></label><select id="provider-type" name="provider_type" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="restaurant">Restaurant</option><option value="private-chef">Private chef</option><option value="culinary-instructor">Culinary instructor</option><option value="caterer-food-truck">Caterer or food truck</option><option value="cultural-host">Cultural host or organization</option><option value="venue">Venue or shared kitchen</option><option value="other">Other</option></select></div>
+                        </div>
                         <div><label for="host-role" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">How might you contribute? <span class="text-[#B77763]">*</span></label><select id="host-role" name="hosting_interest" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="cook">Prepare or share a meal</option><option value="private-chef-service">Offer Private Chef Service</option><option value="storyteller">Share cultural knowledge or a story</option><option value="space">Offer or suggest a setting</option><option value="facilitate">Help welcome or facilitate</option><option value="other">Something else</option></select></div>
-                        <div><label for="host-idea" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Your idea <span class="text-[#B77763]">*</span></label><textarea id="host-idea" name="hosting_idea" required rows="5" placeholder="Tell us about the food tradition, cultural story, setting, or gathering you have in mind." class="mt-2 w-full resize-y rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></textarea></div>
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <div><label for="venue-access" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Do you have a suitable venue? <span class="text-[#B77763]">*</span></label><select id="venue-access" name="venue_access" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="yes-owned">Yes, our own venue</option><option value="yes-access">Yes, we can access one</option><option value="no">No, Stirvana would need to coordinate it</option><option value="not-applicable">Not applicable</option></select></div>
+                            <div><label for="comfortable-capacity" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Comfortable group size <span class="text-[#B77763]">*</span></label><input id="comfortable-capacity" name="comfortable_capacity" type="text" required placeholder="e.g. 6–10 guests" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
+                        </div>
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <div><label for="provider-availability" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">General availability <span class="text-[#B77763]">*</span></label><input id="provider-availability" name="provider_availability" type="text" required placeholder="e.g. Saturday afternoons" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
+                            <div><label for="minimum-economics" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Minimum payout or price <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="minimum-economics" name="minimum_economics" type="text" placeholder="Estimate is fine" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
+                        </div>
+                        <div><label for="host-idea" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Your experience idea <span class="text-[#B77763]">*</span></label><textarea id="host-idea" name="hosting_idea" required rows="5" placeholder="Tell us about the food tradition, cultural story, setting, or gathering you have in mind." class="mt-2 w-full resize-y rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></textarea></div>
+                        <div><label for="readiness" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Pilot readiness <span class="text-[#B77763]">*</span></label><select id="readiness" name="pilot_readiness" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="ready">Ready to discuss one paid pilot</option><option value="details-first">Interested after reviewing details</option><option value="exploring">Exploring only for now</option></select></div>
+                        <div><label for="compliance-notes" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Relevant licensing or insurance <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><textarea id="compliance-notes" name="compliance_notes" rows="2" placeholder="Tell us what applies to your service or venue. We will verify details before any booking." class="mt-2 w-full resize-y rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></textarea></div>
                         <div><label for="host-notes" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Anything else? <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><textarea id="host-notes" name="host_notes" rows="3" placeholder="Availability, relevant experience, or questions" class="mt-2 w-full resize-y rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></textarea></div>
                         <div class="rounded-2xl bg-[#FDFBF7] px-5 py-4 text-sm leading-relaxed text-[#7A2C2B]">Stirvana is learning with a small number of early collaborators. Sharing interest starts a conversation; it does not enroll you in a formal host program.</div>
                         <button type="submit" class="w-full rounded-xl bg-[#5C0D18] px-6 py-3.5 font-semibold text-[#F5D8C4] shadow-lg shadow-[#5C0D18]/10 transition hover:bg-[#7A2C2B] disabled:cursor-wait disabled:opacity-70"><span class="button-label">Share Hosting Interest</span></button>
@@ -127,10 +149,10 @@
             hostTab.setAttribute('aria-selected', String(!isGuest));
             guestTab.className = isGuest ? 'w-1/2 rounded-full bg-white px-3 py-3 text-sm font-semibold text-[#5C0D18] shadow-sm' : 'w-1/2 rounded-full px-3 py-3 text-sm font-medium text-[#7A2C2B]';
             hostTab.className = !isGuest ? 'w-1/2 rounded-full bg-white px-3 py-3 text-sm font-semibold text-[#5C0D18] shadow-sm' : 'w-1/2 rounded-full px-3 py-3 text-sm font-medium text-[#7A2C2B]';
-            heading.textContent = isGuest ? 'Request a Seat' : 'Interested in Hosting?';
-            intro.textContent = isGuest ? 'Tell us what would make a table worth joining. A request is not a confirmed reservation; we’ll follow up personally when there is a relevant next step.' : 'Have a food tradition, cultural story, welcoming space, or gathering idea? Share it with us and we’ll follow up personally if there is a useful next conversation.';
+            heading.textContent = isGuest ? 'Join an Experience' : 'Host an Experience';
+            intro.textContent = isGuest ? 'Tell us what kind of food-and-culture gathering would be worth joining. This is an interest request, not a confirmed reservation.' : 'Restaurants, chefs, instructors, cultural hosts, and venue partners can apply to shape one carefully coordinated paid pilot with Stirvana.';
             priceNote.hidden = !isGuest;
-            document.title = isGuest ? 'Request a Seat | Stirvana' : 'Hosting Interest | Stirvana';
+            document.title = isGuest ? 'Join an Experience | Stirvana' : 'Host an Experience | Stirvana';
         }
 
         function applyAttribution() {
@@ -175,6 +197,10 @@
                 formData.set('cuisine_interest', String(formData.get('food_cultural_interests') || '').trim());
                 formData.set('guest_notes', formatSubmissionSummary([
                     ['Attendance type', getReadableFieldValue(form, formData, 'attendance_type')],
+                    ['Occasion or intent', getReadableFieldValue(form, formData, 'occasion')],
+                    ['Organizer status', getReadableFieldValue(form, formData, 'organizer_status')],
+                    ['Budget per person', getReadableFieldValue(form, formData, 'budget_per_person')],
+                    ['Timing preference', getReadableFieldValue(form, formData, 'timing_preference')],
                     ['Group size', getReadableFieldValue(form, formData, 'group_size')],
                     ['Setting preference', getReadableFieldValue(form, formData, 'setting_preference')],
                     ['Referral source', getReadableFieldValue(form, formData, 'referral_source')],
@@ -189,7 +215,15 @@
                 formData.set('role', 'Chef');
                 formData.set('specialty', hostingInterest);
                 formData.set('experience', formatSubmissionSummary([
+                    ['Business/public name', String(formData.get('business_name') || '').trim()],
+                    ['Provider type', getReadableFieldValue(form, formData, 'provider_type')],
                     ['Hosting/provider interest', hostingInterest],
+                    ['Venue access', getReadableFieldValue(form, formData, 'venue_access')],
+                    ['Comfortable capacity', String(formData.get('comfortable_capacity') || '').trim()],
+                    ['General availability', String(formData.get('provider_availability') || '').trim()],
+                    ['Minimum payout or price', String(formData.get('minimum_economics') || '').trim()],
+                    ['Pilot readiness', getReadableFieldValue(form, formData, 'pilot_readiness')],
+                    ['Licensing/insurance notes', String(formData.get('compliance_notes') || '').trim()],
                     ['Hosting idea', String(formData.get('hosting_idea') || '').trim()],
                     ['Additional notes', String(formData.get('host_notes') || '').trim()],
                     ['utm_source', String(formData.get('utm_source') || '').trim()],
