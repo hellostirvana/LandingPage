@@ -90,7 +90,8 @@ function verifyRecaptcha_(token) {
   });
   const result = JSON.parse(response.getContentText() || '{}');
   const threshold = Number(props.getProperty('RECAPTCHA_MIN_SCORE') || CONFIG.defaultScore);
-  if (!result.success || result.action !== CONFIG.recaptchaAction || Number(result.score || 0) < threshold) {
+  const hostnameAllowed = CONFIG.allowedHostnames.indexOf(result.hostname) !== -1;
+  if (!result.success || result.action !== CONFIG.recaptchaAction || !hostnameAllowed || Number(result.score || 0) < threshold) {
     throw new Error('CAPTCHA:Verification failed');
   }
   return result;
