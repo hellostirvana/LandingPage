@@ -1,31 +1,45 @@
 /**
  * Stirvana Phase 1 intake backend.
+ * Production contract: existing Guests and Chefs tabs.
  * Secrets and private IDs belong in Apps Script Properties, never in GitHub.
  */
 const CONFIG = {
-  intakeSheet: 'Website Intake',
-  supplySheet: '2 - SUPPLY LEADS',
-  demandSheet: '3 - DEMAND LEADS',
+  guestSheet: 'Guests',
+  supplierSheet: 'Chefs',
   recaptchaAction: 'submit',
   defaultScore: 0.5,
   maxPerTenMinutes: 4
 };
 
+const GUEST_HEADERS = [
+  'Timestamp', 'name', 'city', 'email', 'phone', 'Cuisine Interest', 'notes',
+  'reCAPTCHA Score', 'reCAPTCHA Hostname', 'Submission ID', 'Form Version',
+  'Submitted At', 'Source', 'Status'
+];
+
+const SUPPLIER_HEADERS = [
+  'Timestamp', 'name', 'city', 'email', 'phone', 'Specialty', 'Experience',
+  'reCAPTCHA Score', 'reCAPTCHA Hostname', 'Submission ID', 'Business Name',
+  'Provider Types', 'Contributions', 'Venue Access', 'Comfortable Capacity',
+  'Availability', 'Minimum Economics', 'Pilot Readiness', 'Compliance Notes',
+  'Source', 'Form Version', 'Submitted At', 'Status'
+];
+
 function doPost(e) {
   try {
     const payload = parsePayload_(e);
-    if (payload.website) return json_({ result: 'success' }); // honeypot: do not teach bots
+    if (payload.website) return json_({ result: 'success' });
 
     validatePayload_(payload);
-    verifyRecaptcha_(payload.recaptchaToken);
+    const captcha = verifyRecaptcha_(payload.recaptchaToken);
+    payload.recaptcha_score = captcha.score;
+    payload.recaptcha_hostname = captcha.hostname;
     enforceRateLimit_(payload.email);
 
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
     try {
-      saveIntake_(payload);
-      if (payload.role === 'Chef') upsertSupplier_(payload);
-      if (payload.role === 'Guest') appendDemand_(payload);
+      saveSubmission_(payload);
     } finally {
       lock.releaseLock();
     }
@@ -78,6 +92,7 @@ function verifyRecaptcha_(token) {
   if (!result.success || result.action !== CONFIG.recaptchaAction || Number(result.score || 0) < threshold) {
     throw new Error('CAPTCHA:Verification failed');
   }
+  return result;
 }
 
 function enforceRateLimit_(email) {
@@ -95,81 +110,77 @@ function spreadsheet_() {
   return SpreadsheetApp.openById(id);
 }
 
-function saveIntake_(p) {
+function saveSubmission_(p) {
   const ss = spreadsheet_();
-  const sheet = ss.getSheetByName(CONFIG.intakeSheet) || ss.insertSheet(CONFIG.intakeSheet);
-  const headers = ['Received At', 'Submission ID', 'Role', 'Name', 'Email', 'Phone', 'City', 'Business', 'Provider Types', 'Contributions', 'Experience', 'Readiness', 'Source', 'Raw Summary'];
-  if (sheet.getLastRow() === 0) sheet.appendRow(headers);
-  if (findInColumn_(sheet, 2, p.submission_id)) return;
-  sheet.appendRow(safeRow_([
-    p.received_at, p.submission_id, p.role, p.name, p.email, p.phone, p.city,
-    p.business_name, p.provider_type, p.hosting_interest, p.hosting_idea || p.cuisine_interest,
-    p.pilot_readiness, p.utm_source || p.ref || 'Website', p.experience || p.guest_notes
-  ]));
-}
-
-function upsertSupplier_(p) {
-  const sheet = spreadsheet_().getSheetByName(CONFIG.supplySheet);
-  if (!sheet) throw new Error('CONFIG:Supply pipeline tab not found');
-  const row = findSupplierRow_(sheet, p);
-  const now = new Date();
-  const values = [
-    'P2', p.business_name || p.name, p.provider_type, p.city,
-    [p.phone, p.email].filter(Boolean).join(' / '), 'Form Submitted', now,
-    'Website supplier form submitted', 'Review and schedule discovery', '',
-    'Yes', p.utm_source || p.ref || 'Website supplier form',
-    'Submission ' + p.submission_id, 'Form Submitted', '0 - Not assessed',
-    p.name, p.provider_type + ' | ' + p.hosting_interest,
-    p.hosting_idea || p.experience, p.comfortable_capacity, p.minimum_economics,
-    '', p.pilot_readiness, 'Not started', p.compliance_notes
-  ];
-  if (row) sheet.getRange(row, 1, 1, values.length).setValues([safeRow_(values)]);
-  else sheet.appendRow(safeRow_(values));
-}
-
-function appendDemand_(p) {
-  const sheet = spreadsheet_().getSheetByName(CONFIG.demandSheet);
-  if (!sheet) return;
-  if (findTextRow_(sheet, p.email)) return;
-  sheet.appendRow(safeRow_([
-    'P2', p.name, 'Guest', p.city, [p.phone, p.email].filter(Boolean).join(' / '),
-    'Form Submitted', new Date(), 'Website guest form submitted',
-    'Review for relevant founding table', '', 'Website', p.guest_notes || ''
-  ]));
-}
-
-function findSupplierRow_(sheet, p) {
-  const values = sheet.getDataRange().getDisplayValues();
-  const email = p.email.toLowerCase();
-  const business = String(p.business_name || '').toLowerCase();
-  for (let i = 1; i < values.length; i++) {
-    const contact = String(values[i][4] || '').toLowerCase();
-    const name = String(values[i][1] || '').toLowerCase();
-    if ((email && contact.indexOf(email) !== -1) || (business && name === business)) return i + 1;
+  if (p.role === 'Chef') {
+    const sheet = requireSheet_(ss, CONFIG.supplierSheet);
+    ensureHeaders_(sheet, SUPPLIER_HEADERS);
+    const row = [
+      p.received_at, p.name, p.city, p.email, p.phone, p.specialty || p.hosting_interest,
+      p.experience, p.recaptcha_score, p.recaptcha_hostname, p.submission_id,
+      p.business_name, p.provider_type, p.hosting_interest, p.venue_access,
+      p.comfortable_capacity, p.provider_availability, p.minimum_economics,
+      p.pilot_readiness, p.compliance_notes, source_(p), p.form_version,
+      p.submitted_at, 'Form Submitted'
+    ];
+    upsertByEmailOrSubmission_(sheet, row, p.email, p.submission_id);
+  } else {
+    const sheet = requireSheet_(ss, CONFIG.guestSheet);
+    ensureHeaders_(sheet, GUEST_HEADERS);
+    const row = [
+      p.received_at, p.name, p.city, p.email, p.phone, p.cuisine_interest,
+      p.guest_notes, p.recaptcha_score, p.recaptcha_hostname, p.submission_id,
+      p.form_version, p.submitted_at, source_(p), 'Form Submitted'
+    ];
+    upsertByEmailOrSubmission_(sheet, row, p.email, p.submission_id);
   }
-  return 0;
 }
 
-function findTextRow_(sheet, text) {
-  const values = sheet.getDataRange().getDisplayValues();
-  const needle = String(text || '').toLowerCase();
-  for (let i = 1; i < values.length; i++) {
-    if (values[i].join(' ').toLowerCase().indexOf(needle) !== -1) return i + 1;
+function requireSheet_(ss, name) {
+  const sheet = ss.getSheetByName(name);
+  if (!sheet) throw new Error('CONFIG:Required tab not found: ' + name);
+  return sheet;
+}
+
+function ensureHeaders_(sheet, headers) {
+  const existing = sheet.getRange(1, 1, 1, headers.length).getDisplayValues()[0];
+  for (let i = 0; i < headers.length; i++) {
+    if (existing[i] && existing[i] !== headers[i]) {
+      throw new Error('CONFIG:Unexpected header in ' + sheet.getName() + ' column ' + (i + 1));
+    }
   }
-  return 0;
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
 }
 
-function findInColumn_(sheet, column, value) {
-  if (sheet.getLastRow() < 2) return false;
-  return sheet.getRange(2, column, sheet.getLastRow() - 1, 1).getDisplayValues().some(function (row) {
-    return row[0] === value;
-  });
+function upsertByEmailOrSubmission_(sheet, values, email, submissionId) {
+  const lastRow = sheet.getLastRow();
+  let targetRow = 0;
+  if (lastRow >= 2) {
+    const width = Math.max(10, values.length);
+    const rows = sheet.getRange(2, 1, lastRow - 1, width).getDisplayValues();
+    for (let i = 0; i < rows.length; i++) {
+      const rowEmail = String(rows[i][3] || '').toLowerCase();
+      const rowSubmission = String(rows[i][9] || '');
+      if ((submissionId && rowSubmission === submissionId) || (email && rowEmail === email)) {
+        targetRow = i + 2;
+        break;
+      }
+    }
+  }
+  const safe = safeRow_(values);
+  if (targetRow) sheet.getRange(targetRow, 1, 1, safe.length).setValues([safe]);
+  else sheet.appendRow(safe);
+}
+
+function source_(p) {
+  return p.utm_source || p.ref || 'Website';
 }
 
 function sendAcknowledgement_(p) {
-  const subject = p.role === 'Chef' ? 'Stirvana hosting interest received' : 'Stirvana seat request received';
-  const body = p.role === 'Chef'
-    ? 'Hi ' + p.name + ',\n\nThank you for sharing your interest in collaborating with Stirvana. We will review your details and contact you if there is a useful next conversation. Submitting this form does not create a booking or agreement.\n\n— Stirvana'
+  const supplier = p.role === 'Chef';
+  const subject = supplier ? 'Stirvana hosting interest received' : 'Stirvana seat request received';
+  const body = supplier
+    ? 'Hi ' + p.name + ',\n\nThank you for sharing your interest in collaborating with Stirvana. We will review your details and contact you about the next conversation. Submitting this form does not create a booking or agreement.\n\n— Stirvana'
     : 'Hi ' + p.name + ',\n\nThank you. We received your Stirvana seat request and will reach out when there is a relevant next step. This is not a confirmed reservation.\n\n— Stirvana';
   try { MailApp.sendEmail({ to: p.email, subject: subject, body: body, name: 'Stirvana' }); }
   catch (error) { console.error('Acknowledgement email failed', error); }
@@ -207,7 +218,7 @@ function limitFor_(key) {
 
 function safeRow_(values) {
   return values.map(function (value) {
-    if (value instanceof Date) return value;
+    if (value instanceof Date || typeof value === 'number') return value;
     const text = String(value == null ? '' : value);
     return /^[=+\-@]/.test(text) ? "'" + text : text;
   });
