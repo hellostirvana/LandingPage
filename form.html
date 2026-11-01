@@ -15,6 +15,8 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FDFBF7; color: #2D1A1A; }
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
         input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(92, 13, 24, .08); }
+        .form-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+        .choice-card:has(input:checked) { border-color: #5C0D18; background: #FDFBF7; }
     </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -46,7 +48,9 @@
                 <section id="guest-panel" role="tabpanel" aria-labelledby="tab-guest">
                     <form id="guest-form" name="submit-to-google-sheet" class="space-y-5">
                         <input type="hidden" name="role" value="Seat Request">
+                        <input type="hidden" name="submission_id"><input type="hidden" name="submitted_at"><input type="hidden" name="form_version" value="phase-1.0">
                         <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="ref">
+                        <div class="form-honeypot" aria-hidden="true"><label for="guest-website">Leave this field blank</label><input id="guest-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 
                         <div class="grid gap-5 sm:grid-cols-2">
                             <div><label for="guest-name" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Name <span class="text-[#B77763]">*</span></label><input id="guest-name" name="name" type="text" autocomplete="name" required placeholder="Your full name" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
@@ -82,7 +86,9 @@
                 <section id="host-panel" role="tabpanel" aria-labelledby="tab-host" hidden>
                     <form id="host-form" name="submit-to-google-sheet-chef" class="space-y-5">
                         <input type="hidden" name="role" value="Host Interest">
+                        <input type="hidden" name="submission_id"><input type="hidden" name="submitted_at"><input type="hidden" name="form_version" value="phase-1.0">
                         <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="ref">
+                        <div class="form-honeypot" aria-hidden="true"><label for="host-website">Leave this field blank</label><input id="host-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
                         <div class="grid gap-5 sm:grid-cols-2">
                             <div><label for="host-name" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Name <span class="text-[#B77763]">*</span></label><input id="host-name" name="name" type="text" autocomplete="name" required placeholder="Your full name" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
                             <div><label for="host-email" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Email <span class="text-[#B77763]">*</span></label><input id="host-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
@@ -93,9 +99,24 @@
                         </div>
                         <div class="grid gap-5 sm:grid-cols-2">
                             <div><label for="business-name" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Business or public name <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="business-name" name="business_name" type="text" placeholder="Restaurant, chef, venue, or organization" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
-                            <div><label for="provider-type" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Provider type <span class="text-[#B77763]">*</span></label><select id="provider-type" name="provider_type" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="restaurant">Restaurant</option><option value="private-chef">Private chef</option><option value="culinary-instructor">Culinary instructor</option><option value="caterer-food-truck">Caterer or food truck</option><option value="cultural-host">Cultural host or organization</option><option value="venue">Venue or shared kitchen</option><option value="other">Other</option></select></div>
+                            <fieldset id="provider-type" class="sm:col-span-1"><legend class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Provider type <span class="text-[#B77763]">*</span></legend><p class="mt-1 text-xs text-[#9A5046]">Select all that apply.</p><div class="mt-2 grid gap-2">
+                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Restaurant"> Restaurant</label>
+                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Private chef"> Private chef</label>
+                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Culinary instructor"> Culinary instructor</label>
+                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Caterer or food truck"> Caterer or food truck</label>
+                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Cultural host or organization"> Cultural host or organization</label>
+                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Venue or shared kitchen"> Venue or shared kitchen</label>
+                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Other"> Other</label>
+                            </div><p id="provider-roles-error" class="mt-2 hidden text-xs font-medium text-red-700">Choose at least one provider type.</p></fieldset>
                         </div>
-                        <div><label for="host-role" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">How might you contribute? <span class="text-[#B77763]">*</span></label><select id="host-role" name="hosting_interest" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="cook">Prepare or share a meal</option><option value="private-chef-service">Offer Private Chef Service</option><option value="storyteller">Share cultural knowledge or a story</option><option value="space">Offer or suggest a setting</option><option value="facilitate">Help welcome or facilitate</option><option value="other">Something else</option></select></div>
+                        <fieldset id="host-role"><legend class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">How might you contribute? <span class="text-[#B77763]">*</span></legend><p class="mt-1 text-xs text-[#9A5046]">Select all that apply.</p><div class="mt-2 grid gap-2 sm:grid-cols-2">
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Prepare or share a meal"> Prepare or share a meal</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Offer private chef service"> Offer private chef service</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Share cultural knowledge or a story"> Share cultural knowledge or a story</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Offer or suggest a setting"> Offer or suggest a setting</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Help welcome or facilitate"> Help welcome or facilitate</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Other"> Something else</label>
+                        </div><p id="hosting-interests-error" class="mt-2 hidden text-xs font-medium text-red-700">Choose at least one contribution.</p></fieldset>
                         <div class="grid gap-5 sm:grid-cols-2">
                             <div><label for="venue-access" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Do you have a suitable venue? <span class="text-[#B77763]">*</span></label><select id="venue-access" name="venue_access" required class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"><option value="">Choose one</option><option value="yes-owned">Yes, our own venue</option><option value="yes-access">Yes, we can access one</option><option value="no">No, Stirvana would need to coordinate it</option><option value="not-applicable">Not applicable</option></select></div>
                             <div><label for="comfortable-capacity" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Comfortable group size <span class="text-[#B77763]">*</span></label><input id="comfortable-capacity" name="comfortable_capacity" type="text" required placeholder="e.g. 6–10 guests" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
@@ -173,6 +194,31 @@
 
         function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
 
+        function selectedValues(form, name) {
+            return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map(input => input.value.trim());
+        }
+
+        function validateHostSelections() {
+            const groups = [
+                { name: 'provider_roles', errorId: 'provider-roles-error' },
+                { name: 'hosting_interests', errorId: 'hosting-interests-error' }
+            ];
+            let valid = true;
+            groups.forEach(({ name, errorId }) => {
+                const checked = selectedValues(hostForm, name).length > 0;
+                document.getElementById(errorId).classList.toggle('hidden', checked);
+                valid = valid && checked;
+            });
+            if (!valid) hostForm.querySelector('input[name="provider_roles"]').focus();
+            return valid;
+        }
+
+        function prepareSubmissionMetadata(form) {
+            const cryptoId = globalThis.crypto?.randomUUID?.();
+            form.elements.namedItem('submission_id').value = cryptoId || `web-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+            form.elements.namedItem('submitted_at').value = new Date().toISOString();
+        }
+
         function getReadableFieldValue(form, formData, name) {
             const field = form.elements.namedItem(name);
             if (field instanceof HTMLSelectElement && field.selectedIndex >= 0) {
@@ -211,12 +257,16 @@
                     ['ref', String(formData.get('ref') || '').trim()]
                 ]));
             } else {
-                const hostingInterest = getReadableFieldValue(form, formData, 'hosting_interest');
+                const providerRoles = selectedValues(form, 'provider_roles');
+                const hostingInterests = selectedValues(form, 'hosting_interests');
+                const hostingInterest = hostingInterests.join(', ');
                 formData.set('role', 'Chef');
+                formData.set('provider_type', providerRoles.join(', '));
+                formData.set('hosting_interest', hostingInterest);
                 formData.set('specialty', hostingInterest);
                 formData.set('experience', formatSubmissionSummary([
                     ['Business/public name', String(formData.get('business_name') || '').trim()],
-                    ['Provider type', getReadableFieldValue(form, formData, 'provider_type')],
+                    ['Provider type(s)', providerRoles.join(', ')],
                     ['Hosting/provider interest', hostingInterest],
                     ['Venue access', getReadableFieldValue(form, formData, 'venue_access')],
                     ['Comfortable capacity', String(formData.get('comfortable_capacity') || '').trim()],
@@ -279,6 +329,8 @@
 
         async function submitForm(event, form, type) {
             event.preventDefault();
+            if (!form.reportValidity() || (type === 'host' && !validateHostSelections())) return;
+            prepareSubmissionMetadata(form);
             const button = form.querySelector('button[type="submit"]');
             const label = button.querySelector('.button-label');
             const originalLabel = label.textContent;
@@ -289,10 +341,20 @@
                 const token = await getRecaptchaToken();
                 const formData = createCompatiblePayload(form, type);
                 formData.append('recaptchaToken', token);
-                const response = await fetch(scriptURL, { method: 'POST', body: formData });
+                const controller = new AbortController();
+                const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+                let response;
+                try {
+                    response = await fetch(scriptURL, { method: 'POST', body: formData, credentials: 'omit', referrerPolicy: 'strict-origin-when-cross-origin', signal: controller.signal });
+                } finally {
+                    window.clearTimeout(timeoutId);
+                }
                 await parseSubmissionResponse(response);
                 form.reset();
-                applyAttribution();
+                document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(input => { if (!input.maxLength || input.maxLength < 0) input.maxLength = 160; });
+        document.querySelectorAll('textarea').forEach(input => { if (!input.maxLength || input.maxLength < 0) input.maxLength = 2000; });
+        hostForm.querySelectorAll('input[type="checkbox"]').forEach(input => input.addEventListener('change', validateHostSelections));
+        applyAttribution();
                 openModal(type);
             } catch (error) {
                 console.error('Submission error:', { type, error });
