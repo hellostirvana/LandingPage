@@ -351,10 +351,7 @@
                 }
                 await parseSubmissionResponse(response);
                 form.reset();
-                document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(input => { if (!input.maxLength || input.maxLength < 0) input.maxLength = 160; });
-        document.querySelectorAll('textarea').forEach(input => { if (!input.maxLength || input.maxLength < 0) input.maxLength = 2000; });
-        hostForm.querySelectorAll('input[type="checkbox"]').forEach(input => input.addEventListener('change', validateHostSelections));
-        applyAttribution();
+                applyAttribution();
                 openModal(type);
             } catch (error) {
                 console.error('Submission error:', { type, error });
@@ -372,6 +369,10 @@
         document.getElementById('close-modal').addEventListener('click', closeModal);
         modal.addEventListener('click', event => { if (event.target === modal || event.target === modal.firstElementChild) closeModal(); });
         document.addEventListener('keydown', event => { if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+
+        document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(input => { if (!input.maxLength || input.maxLength < 0) input.maxLength = 160; });
+        document.querySelectorAll('textarea').forEach(input => { if (!input.maxLength || input.maxLength < 0) input.maxLength = 2000; });
+        hostForm.querySelectorAll('input[type="checkbox"]').forEach(input => input.addEventListener('change', validateHostSelections));
 
         const initialRole = new URLSearchParams(window.location.search).get('role');
         showTab(initialRole === 'host' || initialRole === 'chef' ? 'host' : 'guest');
