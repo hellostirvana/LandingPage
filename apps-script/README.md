@@ -16,14 +16,14 @@ This folder is the auditable server-side counterpart to `form.html`. It contains
 
 ## Private configuration
 
-Create or open a Google Apps Script project owned by Stirvana. In **Project Settings → Script properties**, add:
+Open the Stirvana-owned Google Apps Script project. In **Project Settings → Script properties**, retain the existing reCAPTCHA secret and add the remaining properties:
 
 | Property | Required | Value |
 |---|---:|---|
 | `SPREADSHEET_ID` | Yes | ID of the private supplier pipeline spreadsheet |
 | `RECAPTCHA_SECRET` | Yes | Secret paired with the public site key in `form.html` |
 | `INTERNAL_NOTIFICATION_EMAIL` | Recommended | Private operations inbox |
-| `RECAPTCHA_MIN_SCORE` | No | Defaults to `0.5` |
+| `RECAPTCHA_MIN_SCORE` | No | Defaults to `0.1` while production scores are being observed |
 
 Never commit these values.
 
