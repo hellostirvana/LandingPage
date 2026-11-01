@@ -16,7 +16,10 @@
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
         input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(92, 13, 24, .08); }
         .form-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
-        .choice-card:has(input:checked) { border-color: #5C0D18; background: #FDFBF7; }
+        .choice-card { cursor: pointer; min-height: 3.5rem; transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease; }
+        .choice-card:hover { border-color: #D3A88A; background: #FDFBF7; }
+        .choice-card:has(input:checked) { border-color: #5C0D18; background: #FDFBF7; box-shadow: 0 0 0 1px rgba(92, 13, 24, .08); }
+        .choice-card input[type="checkbox"] { width: 1rem; height: 1rem; flex: 0 0 auto; accent-color: #5C0D18; }
     </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -97,18 +100,16 @@
                             <div><label for="host-city" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">City or area <span class="text-[#B77763]">*</span></label><input id="host-city" name="city_area" type="text" required placeholder="Your area" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
                             <div><label for="host-phone" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Phone <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="host-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 000-0000" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
                         </div>
-                        <div class="grid gap-5 sm:grid-cols-2">
-                            <div><label for="business-name" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Business or public name <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="business-name" name="business_name" type="text" placeholder="Restaurant, chef, venue, or organization" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
-                            <fieldset id="provider-type" class="sm:col-span-1"><legend class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Provider type <span class="text-[#B77763]">*</span></legend><p class="mt-1 text-xs text-[#9A5046]">Select all that apply.</p><div class="mt-2 grid gap-2">
-                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Restaurant"> Restaurant</label>
-                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Private chef"> Private chef</label>
-                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Culinary instructor"> Culinary instructor</label>
-                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Caterer or food truck"> Caterer or food truck</label>
-                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Cultural host or organization"> Cultural host or organization</label>
-                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Venue or shared kitchen"> Venue or shared kitchen</label>
-                                <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Other"> Other</label>
-                            </div><p id="provider-roles-error" class="mt-2 hidden text-xs font-medium text-red-700">Choose at least one provider type.</p></fieldset>
-                        </div>
+                        <div><label for="business-name" class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Business or public name <span class="normal-case font-normal text-[#9A5046]">(optional)</span></label><input id="business-name" name="business_name" type="text" placeholder="Restaurant, chef, venue, or organization" class="mt-2 w-full rounded-xl border border-[#E5E0D8] bg-[#FDFBF7] px-4 py-3 text-sm focus:border-[#5C0D18] focus:bg-white"></div>
+                        <fieldset id="provider-type"><legend class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">Provider type <span class="text-[#B77763]">*</span></legend><p class="mt-1 text-xs text-[#9A5046]">Select all that apply.</p><div class="mt-2 grid gap-2 sm:grid-cols-2">
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Restaurant"> Restaurant</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Private chef"> Private chef</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Culinary instructor"> Culinary instructor</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Caterer or food truck"> Caterer or food truck</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Cultural host or organization"> Cultural host or organization</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="provider_roles" type="checkbox" value="Venue or shared kitchen"> Venue or shared kitchen</label>
+                            <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm sm:col-span-2"><input name="provider_roles" type="checkbox" value="Other"> Other</label>
+                        </div><p id="provider-roles-error" class="mt-2 hidden text-xs font-medium text-red-700">Choose at least one provider type.</p></fieldset>
                         <fieldset id="host-role"><legend class="text-xs font-semibold uppercase tracking-wide text-[#5C0D18]">How might you contribute? <span class="text-[#B77763]">*</span></legend><p class="mt-1 text-xs text-[#9A5046]">Select all that apply.</p><div class="mt-2 grid gap-2 sm:grid-cols-2">
                             <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Prepare or share a meal"> Prepare or share a meal</label>
                             <label class="choice-card flex items-center gap-3 rounded-xl border border-[#E5E0D8] px-4 py-3 text-sm"><input name="hosting_interests" type="checkbox" value="Offer private chef service"> Offer private chef service</label>
