@@ -7,7 +7,8 @@ const CONFIG = {
   guestSheet: 'Guests',
   supplierSheet: 'Chefs',
   recaptchaAction: 'submit',
-  defaultScore: 0.5,
+  allowedHostnames: ['stirvana.food', 'www.stirvana.food'],
+  defaultScore: 0.1,
   maxPerTenMinutes: 4
 };
 
